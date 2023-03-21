@@ -1,22 +1,32 @@
+import "./LoginPage.css";
+import { useNavigate  } from "react-router-dom";
 import React from "react";
-import RegisterUser from "../RegisterUserComponent/RegisterUser";
-import LoginComponent from "../LoginComponent/LoginComponent";
-import "./LoginPage.css"
 
-// MAIN COMPONENT, LOGIN PAGE MAIN
-const LoginPage = ({setShowLogin, setPageToShow}) => {
+const LoginComponent = ({setShowRegister, setShowLogin, setPageToShow}) => {
+    const navigate = useNavigate();
 
-    const [showRegister, setShowRegister] = React.useState(false);
-
-    // setShowLogin passed to login component, on the event of successful login
-    return (
+    const handleLogin = (successful) => {
+        console.log("preliminary");
+    }
+    return ( 
         <div className="loginCover">
-            
-            {showRegister ? <RegisterUser setShowRegister={setShowRegister}/> 
-                : <LoginComponent setShowRegister={setShowRegister} setShowLogin={setShowLogin} setPageToShow={setPageToShow}/>}
-        
+            <form action="" method="post">
+                <div className="loginPage">
+                    <h1>Firestone Project</h1>
+                    <input className="loginInput" id="username" type="text" placeholder="username" />
+                    <input className="loginInput" id ="password" type="password" placeholder="password" />
+
+                    <div className="login-btn" onClick= {() => {handleLogin(false);}}>Login</div>
+                    <div className="alt-login">
+                        <div className="login-btn" id="register" onClick={() => {
+                            navigate("/register");
+                        }}>Register New User</div>
+                    </div>
+                    {/* {requestError ? <OperationFailedComponent error={"Username or password invalid"} /> : null} */}
+                </div>
+            </form>
         </div>
      );
 }
  
-export default LoginPage;
+export default LoginComponent;

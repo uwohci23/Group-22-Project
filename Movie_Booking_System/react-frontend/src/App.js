@@ -1,7 +1,9 @@
 import './App.css';
+import {BrowserRouter as Router} from "react-router-dom";
 import LoginPage from './Components/LoginPage/LoginPage';
 import MainPages from './Components/MainPages/MainPages';
 import React from 'react';
+import AnimatedRoutes from './Components/Routes/RoutesComponent';
 
 function App() {
 
@@ -10,8 +12,11 @@ function App() {
 
     return (
     <div className="App">
-        {showLogin ? <LoginPage setShowLogin={setShowLogin} setPageToShow={setPageToShow}/>
-            : <MainPages setShowLogin={setShowLogin} pageToShow={pageToShow}/>}
+        {/* {showLogin ? <LoginPage setShowLogin={setShowLogin} setPageToShow={setPageToShow}/>
+            : <MainPages setShowLogin={setShowLogin} pageToShow={pageToShow}/>} */}
+        <Router>
+            <AnimatedRoutes />
+        </Router>
     </div>
     );
 }
