@@ -1,10 +1,12 @@
 import React from "react";
-import "./NavBar.css"
+import "./NavBar.css";
+import { useNavigate  } from "react-router-dom";
 
 const NavBar = ({setShowLogin, navBarUsername}) => {
+    const navigate = useNavigate();
 
     const handleLogout = (state) => {
-        setShowLogin(state);
+        navigate("/");
     }
     return (
         <div className="NavBarCover">

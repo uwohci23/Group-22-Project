@@ -1,6 +1,7 @@
 import "./LoginPage.css";
 import Axios from "axios";
 import { useNavigate  } from "react-router-dom";
+import OperationFailedComponent from "../OperationFailedComponent/OperationFailedComponent";
 import React from "react";
 
 const LoginComponent = ({setUserName}) => {
@@ -57,7 +58,7 @@ const LoginComponent = ({setUserName}) => {
                             navigate("/register");
                         }}>Register New User</div>
                     </div>
-                    {/* {requestError ? <OperationFailedComponent error={"Username or password invalid"} /> : null} */}
+                    {requestError ? <OperationFailedComponent error={"Username or password invalid"} /> : null}
                 </div>
             </form>
         </div>
