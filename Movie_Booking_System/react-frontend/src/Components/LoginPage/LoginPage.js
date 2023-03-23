@@ -39,6 +39,7 @@ const LoginComponent = ({setUserName}) => {
                         navigate("/admin");
                     } else {
                         setPageToShow(["normal", username]);
+                        navigate("/main");
                     }
                 }
         }).catch((error) => {setRequestError(true);});

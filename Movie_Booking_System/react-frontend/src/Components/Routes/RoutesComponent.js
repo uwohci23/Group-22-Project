@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Route, Routes, useLocation} from "react-router-dom"
+import {BrowserRouter as Router, Route, Routes, useLocation} from "react-router-dom";
 import LoginComponent from "../LoginPage/LoginPage";
 import MainPage from "../MainPage/MainPage";
 import React from "react";
@@ -6,6 +6,7 @@ import React from "react";
 import { AnimatePresence } from "framer-motion";
 import RegisterUser from "../RegisterUserComponent/RegisterUser";
 import StaffPage from "../StaffPage/StaffPage";
+// import StaffDropDownComponent from "../staffDropDownComponent/staffDropDownComponent";
 
 function AnimatedRoutes() {
     const [userName, setUserName] = React.useState("");

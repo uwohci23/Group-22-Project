@@ -13,12 +13,15 @@ const StaffPage = ({setShowLogin, navBarUsername}) => {
     const [requestGood, setRequestGood] = React.useState(false);
 
     const handleMoviePost = (data) => {
+        // set up new movie request
         const request = {
             title: data.title,
             image_url: data.imageUrl,
             release_date: data.releaseDate,
             age_rating: data.ageRating,
         };
+
+        // make Axios Request
         const result = Axios.post("http://127.0.0.1:5000/movie/add", request).then(
             (response) => {
                 if (response.data.status) {
