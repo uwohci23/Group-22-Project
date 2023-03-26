@@ -1,6 +1,7 @@
 .menu {
     /* 100px => .5vh */
     width: 300px;
+    margin-top: 2vh;
 }
 .listCover {
     display: flex;
@@ -9,7 +10,7 @@
     background-color: #040608;
 }
 
-.listItem {
+.listItemDropdown {
     color: rgb(0, 180, 203);
     cursor: pointer;
     display: block;
@@ -18,7 +19,7 @@
     padding: 10px;
 }
 
-.listItem:hover {
+.listItemDropdown:hover {
     color: rgb(212, 212, 212);
     transition: 0.6s;
 }

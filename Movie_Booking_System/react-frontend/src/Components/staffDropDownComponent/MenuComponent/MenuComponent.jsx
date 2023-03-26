@@ -72,11 +72,11 @@ const MenuComponent = ({ isOpen, setIsOpen }) => {
             className="listCover"
             variants={ listVariants }
         >
-            <motion.li className='listItem' variants={ itemVariants }>item 1</motion.li>
-            <motion.li className='listItem' variants={ itemVariants }>item 2</motion.li>
-            <motion.li className='listItem' variants={ itemVariants }>item 3</motion.li>
-            <motion.li className='listItem' variants={ itemVariants }>item 4</motion.li>
-            <motion.li className='listItem' variants={ itemVariants }>item 5</motion.li>
+            <motion.li className='listItemDropdown' variants={ itemVariants }>item 1</motion.li>
+            <motion.li className='listItemDropdown' variants={ itemVariants }>item 2</motion.li>
+            <motion.li className='listItemDropdown' variants={ itemVariants }>item 3</motion.li>
+            <motion.li className='listItemDropdown' variants={ itemVariants }>item 4</motion.li>
+            <motion.li className='listItemDropdown' variants={ itemVariants }>item 5</motion.li>
         </motion.ul>
     </motion.nav>
   )

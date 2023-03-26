@@ -18,8 +18,8 @@ function AnimatedRoutes() {
             <Route path="/register" element={<RegisterUser />}/>
             {/* <Route path="/login" element={<LoginComponent />}/> */}
             <Route path="/" element={<LoginComponent setUserName={setUserName}/>}/>
-            {/* <Route path="/admin" element={<StaffPage navBarUsername={userName}/>}/> */}
-            <Route path="/admin" element={<StaffDropDownComponent />}/>
+            <Route path="/admin" element={<StaffPage navBarUsername={userName}/>}/>
+            {/* <Route path="/admin" element={<StaffDropDownComponent />}/> */}
         </Routes>
     </AnimatePresence>
     );

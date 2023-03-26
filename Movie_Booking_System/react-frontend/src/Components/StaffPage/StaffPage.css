@@ -5,11 +5,22 @@
     height: 100vh;
     flex-direction: row;
 }
+.mainComponentsCover {
+    display: flex;
+}
+.mainComponentsCover .dropDownMoviesMenu {
+    flex: 1;
+}
+.mainComponentsCover .staffCover {
+    flex: 1;
+}
 
 .staffForm {
     background-color: white;
     /* padding: 0px 60px; */
     flex-direction: column;
+    display: flex;
+    align-items: center;
     width: 250px;
     border-radius: 5px;
     border: 1px solid gray;
