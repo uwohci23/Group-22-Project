@@ -6,7 +6,7 @@ import React from "react";
 import { AnimatePresence } from "framer-motion";
 import RegisterUser from "../RegisterUserComponent/RegisterUser";
 import StaffPage from "../StaffPage/StaffPage";
-import StaffDropDownComponent from "../StaffDropDownComponent/StaffDropDownComponent";
+import StaffDropDownComponent from "../staffDropDownComponent/StaffDropDownComponent"
 
 function AnimatedRoutes() {
     const [userName, setUserName] = React.useState("");

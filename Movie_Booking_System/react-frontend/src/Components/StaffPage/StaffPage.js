@@ -6,7 +6,7 @@ import NavBar from "../NavBar/NavBar";
 import Axios from "axios";
 import OperationFailedComponent from "../OperationFailedComponent/OperationFailedComponent";
 import OperationSuccessfulComponent from "../OperationSuccessfulComponent/OperationSuccessfulComponent";
-import StaffDropDownComponent from "../StaffDropDownComponent/StaffDropDownComponent";
+import StaffDropDownComponent from "../staffDropDownComponent/StaffDropDownComponent";
 
 // MAIN COMPONENT, LOGIN PAGE MAIN
 const StaffPage = ({setShowLogin, navBarUsername}) => {
