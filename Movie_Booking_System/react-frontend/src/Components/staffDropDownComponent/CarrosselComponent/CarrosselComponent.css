@@ -1,0 +1,39 @@
+.carrosselWrapper {
+    margin: 0 auto;
+    min-height: 50vh;
+    max-width: 800px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.innerCarrossel {
+    display: flex;
+    padding: 14px;
+}
+
+.item img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    pointer-events: none;
+}
+.item {
+    flex: 1 0 21%;
+    min-height: 300px;
+    min-width: 400px;
+    padding-left: 2%;
+    margin: 10px;
+}
+
+.carrossel {
+    cursor: grab;
+    overflow: hidden;
+}
+
+@media only screen and (max-width: 800px) {
+    .carrosselWrapper {
+        display: none;
+    }
+}

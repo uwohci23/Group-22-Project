@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import "./MovieCardComponent.css";
+import { motion } from "framer-motion";
 
 // Props to Pass:
 //     - imageUrl: url of the imageUrl
@@ -8,32 +9,35 @@ import "./MovieCardComponent.css";
 const MovieCardComponent = (props) => {
 
     const handleClick = (event) => {
-        props.setDisplayModal({
-            imageUrl: props.imageUrl,
-            title: props.title,
-            releaseDate: props.releaseDate
-        });
-      };
+        if (props.setDisplayModal) {
+            props.setDisplayModal({
+                imageUrl: props.imageUrl,
+                title: props.title,
+                releaseDate: props.releaseDate
+            });
+          };
+        }
+
 
     return (
-        <div className="cardContainer" key={props.key}>
-            <div className="imageContainer">
-                <img src={props.imageUrl} alt="Image Unavailable" />
-            </div>
-            <div className="cardContent">
-                <div className="cardTitle">
-                    <h3>{props.title}</h3>
-                </div>
-                <div className="cardReleaseDate">
-                    <p>{props.releaseDate}</p>
-                </div>
-                <div className="cardButton">
-                    <button onClick= {() => {handleClick(true);}}>
+        <motion.div className="cardContainer" key={props.key}>
+            <motion.div className="imageContainer">
+                <motion.img src={props.imageUrl} alt="Image Unavailable" />
+            </motion.div>
+            <motion.div className="cardContent">
+                <motion.div className="cardTitle">
+                    <motion.h3>{props.title}</motion.h3>
+                </motion.div>
+                <motion.div className="cardReleaseDate">
+                    <motion.p>{props.releaseDate}</motion.p>
+                </motion.div>
+                <motion.div className="cardButton">
+                    <motion.button onClick= {() => {handleClick(true);}}>
                         See Sessions
-                    </button>
-                </div>
-            </div>
-        </div>
+                    </motion.button>
+                </motion.div>
+            </motion.div>
+        </motion.div>
         
     )
 }
