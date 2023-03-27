@@ -36,7 +36,9 @@ body {
     font-size: 20px;
     height: 100%;
 }
-
+.listItem input[type="text"] {
+    font-size: 15px;
+  }
 .listItem:hover {
     background-color: rgba(184, 141, 240, 0.618);
     cursor: pointer;

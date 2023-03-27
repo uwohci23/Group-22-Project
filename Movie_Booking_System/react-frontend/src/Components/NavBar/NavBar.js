@@ -15,7 +15,7 @@ const NavBar = ({setShowLogin, navBarUsername,setSearchQuery}) => {
                 <ul className="itemsList">
                 <li className="listItem"> 
 
-                <input
+                <input 
                     type="text"
                     placeholder="Search movies..."
                     onChange={(event) => setSearchQuery(event.target.value)}
