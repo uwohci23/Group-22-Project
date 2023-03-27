@@ -27,15 +27,18 @@ body {
     color: inherit;
     height: 100%;
     display: flex;
-    padding: .25rem;
+    padding: 16px;
     font-size: 30px;
 }
 
 .listItem {
+    padding: 16px;
     font-size: 20px;
     height: 100%;
 }
-
+.listItem input[type="text"] {
+    font-size: 15px;
+  }
 .listItem:hover {
     background-color: rgba(184, 141, 240, 0.618);
     cursor: pointer;
