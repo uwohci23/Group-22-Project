@@ -6,12 +6,13 @@ user_blueprint = Blueprint('user', __name__, url_prefix='/user')
 db = Database()
 login_server = LoginServer()
 
-# GET /user/<user_id>
-@user_blueprint.route('/<user_id>', methods=['GET'])
-def get_user(user_id: str):
-    data = db.get_user_by_id(user_id)
 
+
+@user_blueprint.route('/<user_id>/bookmarklist',methods=['GET'])
+def get_bookmarks(user_id: str):
+    data = db.get_bookmarks(user_id)
     # If the user doesn't exist, return a 404
+    print(data)
     if data is None:
         return jsonify({
             'status': False,
@@ -20,6 +21,7 @@ def get_user(user_id: str):
     
     # Otherwise, return the user data
     return jsonify(data), 200
+
 
 # POST /user/register
 @user_blueprint.route('/register', methods=['POST'])
@@ -72,7 +74,8 @@ def login_user():
         return jsonify({
             'status': True,
             'message': 'Login successful',
-            'admin_status': user['admin_status']
+            'admin_status': user['admin_status'],
+            'userid': user['user_id']
         }), 200
     else:
         return jsonify({
@@ -101,3 +104,93 @@ def add_receipt():
         'status': True,
         'message': 'Receipt added',
     }), 201
+
+@user_blueprint.route('/bookmark/add',methods=['POST'])
+def add_bookmark():
+    data = request.get_json()
+
+    result = db.add_bookmark(data['user_id'], data['movie_id'])
+
+    if not result:
+        return jsonify({
+            'status': False,
+            'message': 'Bookmark failed',
+        }), 409
+    
+    return jsonify({
+        'status': True,
+        'message': 'Bookmark added',
+    }), 201
+
+@user_blueprint.route('/<user_id>', methods=['GET'])
+def get_user(user_id: str):
+    data = db.get_user_by_id(user_id)
+
+    # If the user doesn't exist, return a 404
+    if data is None:
+        return jsonify({
+            'status': False,
+            'message': 'User not found',
+        }), 404
+    
+    # Otherwise, return the user data
+    return jsonify(data), 200
+
+@user_blueprint.route('/bookmark/delete',methods=['DELETE'])
+def delete_bookmark():
+    data = request.get_json()
+
+    result = db.delete_bookmark(data['user_id'], data['movie_id'])
+
+    if not result:
+        return jsonify({
+            'status': False,
+            'message': 'Bookmark cannot delete',
+        }), 409
+    
+    return jsonify({
+        'status': True,
+        'message': 'Bookmark deleted',
+    }), 201
+
+@user_blueprint.route('/bookmarks',methods=['GET'])
+def get_all_bookmarks():
+
+    data = db.get_all_bookmarks()
+    # If the user doesn't exist, return a 404
+    if data is None:
+        return jsonify({
+            'status': False,
+            'message': 'User not found',
+        }), 404
+    
+    # Otherwise, return the user data
+    return jsonify(data), 200
+
+@user_blueprint.route('/list',methods=['GET'])
+def get_all_users():
+    data = db.get_all_users()
+    print(jsonify(data))
+    if data is None:
+        return jsonify({
+            'status': False,
+            'message': 'User not found',
+        }), 404
+    
+    
+    # Otherwise, return the user data
+    return jsonify(data), 200
+
+
+@user_blueprint.route('/list/<username>',methods=['GET'])
+def get_userid(username: str):
+    data = db.get_user_by_username(username)
+    if data is None:
+        return jsonify({
+            'status': False,
+            'message': 'User not found',
+        }), 404
+    
+    
+    # Otherwise, return the user data
+    return jsonify(data), 200
