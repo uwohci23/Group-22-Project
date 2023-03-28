@@ -6,7 +6,7 @@ import React from "react";
 import { AnimatePresence } from "framer-motion";
 import RegisterUser from "../RegisterUserComponent/RegisterUser";
 import StaffPage from "../StaffPage/StaffPage";
-import StaffDropDownComponent from "../staffDropDownComponent/StaffDropDownComponent"
+// import StaffDropDownComponent from "../StaffDropDownComponent/StaffDropDownComponent";
 
 function AnimatedRoutes() {
     const [userName, setUserName] = React.useState("");
@@ -19,7 +19,6 @@ function AnimatedRoutes() {
             {/* <Route path="/login" element={<LoginComponent />}/> */}
             <Route path="/" element={<LoginComponent setUserName={setUserName}/>}/>
             <Route path="/admin" element={<StaffPage navBarUsername={userName}/>}/>
-            {/* <Route path="/admin" element={<StaffDropDownComponent />}/> */}
         </Routes>
     </AnimatePresence>
     );

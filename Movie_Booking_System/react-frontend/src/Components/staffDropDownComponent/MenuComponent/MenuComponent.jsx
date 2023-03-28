@@ -53,14 +53,27 @@ const itemVariants = {
 
 
 const MenuComponent = ({ isOpen, setIsOpen }) => {
+
+
     const [movieList, setMovieList] = React.useState([]);
     const [searchMovies, setSearchMovies] = React.useState(null);
     React.useEffect(() => {
         handleList();
-        console.log(movieList);
     }, [])
 
-    
+    const handleSearchQuery = (query) => {
+
+        if(query != ''){
+            const refinedMovieList = movieList.filter((movie) => {
+                return movie.title.toLowerCase().includes(query.toLowerCase());
+              });
+            setSearchMovies(refinedMovieList);    
+        }
+        else{
+            setSearchMovies(movieList);
+        }
+
+    }
     // request for all movies
     // NEEDS TO BE ASYNC SO THAT RENDERING ACTUALLY GETS MOVIES
     const handleList = async () => {
@@ -68,6 +81,7 @@ const MenuComponent = ({ isOpen, setIsOpen }) => {
             (response) => {
                 if (response.status < 400) {
                     setMovieList(response.data);
+                    setSearchMovies(response.data);
                 }else {
                     setMovieList([]);
                 }
@@ -94,16 +108,25 @@ const MenuComponent = ({ isOpen, setIsOpen }) => {
                 </svg>
             </motion.div>
         </motion.button>
-        <motion.ul 
-            className="listCover"
-            variants={ listVariants }
-        >
-            {searchMovies ? searchMovies.map((movie) => {
-                    return <MovieCardComponent className="listItemDropdown" key={movie.id} title={movie.title} imageUrl={movie.image_url}
-                    releaseDate={movie.release_date}/>
-                }) : <h4>Search For a movie</h4>}
-                {/* {movieList ? <CarrosselComponent movieCards={movieList} /> : null} */}
-        </motion.ul>
+        <motion.div className="currentMoviesWrapper">
+            <motion.ul
+                className="listCover"
+                variants={ listVariants }
+            >
+                <input
+                    type="text"
+                    placeholder="Search movies..."
+                    onChange={(event) => handleSearchQuery(event.target.value)}
+                    className="searchBarStaff"
+
+                >
+                </input>
+                {searchMovies ? searchMovies.map((movie) => {
+                        return <MovieCardComponent className="listItemDropdown" key={movie.id} title={movie.title} imageUrl={movie.image_url}
+                        releaseDate={movie.release_date}/>
+                    }) : <h4>Search For a movie</h4>}
+            </motion.ul>
+        </motion.div>
     </motion.nav>
   )
 }
