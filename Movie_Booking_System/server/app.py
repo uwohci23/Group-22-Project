@@ -1,7 +1,7 @@
 import os
 from flask import Flask
 from flask_cors import CORS, cross_origin
-
+from db import Database
 def create_app(test_config=None):
         # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
