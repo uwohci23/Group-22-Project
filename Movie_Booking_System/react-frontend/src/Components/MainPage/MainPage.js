@@ -6,31 +6,50 @@ import NavBar from '../NavBar/NavBar.js';
 import "./MainPage.css";
 
 const MainPage = (props) => {
-    
     const [movieList, setMovieList] = React.useState([]);
     const [originalMovieList, setOriginalMovieList] = React.useState([]);
-
     const [showMoviesbutton, setShowMoviesButton] = React.useState(true);
     const [displayModal, setDisplayModal] = React.useState(null);
     const [searchQuery, setSearchQuery] = React.useState('');
-
-    const handleList = () => {
+    const [bookmarkList,setBookmarkList] = React.useState('');
+    
+    const handleList =  async () => {
         setShowMoviesButton(false);
-        const result = Axios.get("http://127.0.0.1:5000/movie/list").then(
-            (response) => {
-                if (response.status < 400) {
-                    setOriginalMovieList(response.data)
-                    setMovieList(response.data);
-                }else {
-                    setMovieList = [];
-                }
-             }
-        )
-        console.log(movieList);
+        const response1 = await  Axios.get("http://127.0.0.1:5000/movie/list");
+        if (response1.status < 400) {
+            setOriginalMovieList(response1.data);
+            setMovieList(response1.data);
+
+        }
+        
+
+        const response2 = await Axios.get(`http://127.0.0.1:5000/user/${props.navBarUserid}/bookmarklist`);
+        if (response2.status < 400) {
+                setBookmarkList(response2.data);
+                const updatedMovieList = response1.data.map((movie) => {
+                    const bookmark = response2.data.find((bookmark) => bookmark.movie_id === movie.movie_id);
+                    if (bookmark) {
+                        return { ...movie, bookmark: true };
+                    } else {
+                        return { ...movie, bookmark: false };
+                    }
+                });
+
+                // console.log("upd",updatedMovieList)
+                setMovieList(updatedMovieList);
+                setOriginalMovieList(updatedMovieList);
+                
+             
+        
     }
+    }
+    React.useEffect(() => {
+
+      }, [movieList,bookmarkList]);
+
     const handleSearchQuery = (query) => {
         setSearchQuery(query);
-        if(query != ''){
+        if(query !== ''){
             const refinedMovieList = movieList.filter((movie) => {
                 return movie.title.toLowerCase().includes(query.toLowerCase());
               });
@@ -43,6 +62,7 @@ const MainPage = (props) => {
     }
 
     return(
+
         <div className="mainCover">
             <NavBar setShowLogin={props.setShowLogin} navBarUsername={props.navBarUsername} setSearchQuery={handleSearchQuery}/>
             {showMoviesbutton ?
@@ -52,8 +72,8 @@ const MainPage = (props) => {
             : null}
             <div className="movieGrid">
                 {movieList ? movieList.map((movie) => {
-                    return <MovieCardComponent className="movieChild" key={movie.id} title={movie.title} imageUrl={movie.image_url}
-                    releaseDate={movie.release_date} setDisplayModal={setDisplayModal}/>
+                    return <MovieCardComponent key={movie.movie_id} id={movie.movie_id} className="movieChild" title={movie.title} imageUrl={movie.image_url}
+                    releaseDate={movie.release_date} userid={props.navBarUserid} bookmark={movie.bookmark}  setDisplayModal={setDisplayModal}/>
                 }) : null}
 
                 {displayModal ? <Modal movieData={displayModal} setShow={setDisplayModal}/> : null}

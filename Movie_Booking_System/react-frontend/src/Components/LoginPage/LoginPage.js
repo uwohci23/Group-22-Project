@@ -4,7 +4,7 @@ import { useNavigate  } from "react-router-dom";
 import OperationFailedComponent from "../OperationFailedComponent/OperationFailedComponent";
 import React from "react";
 
-const LoginComponent = ({setUserName}) => {
+const LoginComponent = ({setUserName,setUserid}) => {
     const navigate = useNavigate();
 
     const [requestError, setRequestError] = React.useState(false);
@@ -35,12 +35,17 @@ const LoginComponent = ({setUserName}) => {
                 if (response.data.status) {
                     // login is successful, check for admin
                     if (response.data.admin_status > 0) {
+
                         setUserName(username);
+                        setUserid(response.data.userid)
                         navigate("/admin");
                     } else {
                         setPageToShow(["normal", username]);
+                        setUserName(username);
+                        setUserid(response.data.userid)
                         navigate("/main");
                     }
+
                 }
         }).catch((error) => {setRequestError(true);});
     }
