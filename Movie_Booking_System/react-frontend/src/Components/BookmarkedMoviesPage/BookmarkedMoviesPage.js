@@ -61,7 +61,7 @@ const BookmarkedMoviesPage = (navBarUserid,) => {
             <div className="movieGrid">
                 {movieList ? movieList.map((movie) => {
                     return <MovieCardComponent key={movie.movie_id} id={movie.movie_id} className="movieChild" title={movie.title} imageUrl={movie.image_url}
-                    releaseDate={movie.release_date} userid={navBarUserid}  setDisplayModal={setDisplayModal}/>
+                    releaseDate={movie.release_date} userid={navBarUserid} bookmark={true}  setDisplayModal={setDisplayModal}/>
                 }) : null}
 
                 {displayModal ? <Modal movieData={displayModal} setShow={setDisplayModal}/> : null}
