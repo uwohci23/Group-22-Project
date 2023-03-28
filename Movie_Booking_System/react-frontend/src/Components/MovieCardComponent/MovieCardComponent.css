@@ -31,6 +31,7 @@
 
 .cardTitle {
     margin-bottom: 0.5rem;
+    white-space: nowrap;
 }
 
 h3 {
@@ -40,9 +41,14 @@ h3 {
     justify-content: space-evenly;
 }
 
+.bookmarkButton { 
+    text-align: right;
+    font-size: 20px;
+}
+
+
 .cardReleaseDate {
-    padding: 0;
-    margin:0;
+    text-align: center;
 }
 
 .cardButton {

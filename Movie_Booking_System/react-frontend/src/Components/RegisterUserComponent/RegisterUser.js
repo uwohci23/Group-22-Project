@@ -4,8 +4,10 @@ import "./RegisterUser.css"
 import Axios from "axios";
 import OperationFailedComponent from "../OperationFailedComponent/OperationFailedComponent";
 import OperationSuccessfulComponent from "../OperationSuccessfulComponent/OperationSuccessfulComponent";
+import { useNavigate  } from "react-router-dom";
 
 const RegisterUser = ({setShowRegister}) => {
+    const navigate = useNavigate();
     // make input states
     const [values, setValues] = React.useState({
         username: "",
@@ -21,7 +23,7 @@ const RegisterUser = ({setShowRegister}) => {
 
     // handle login display after user register
     const handleShow = (state) => {
-        setShowRegister(state);
+        navigate("/");
     }
 
     // handle form submission
