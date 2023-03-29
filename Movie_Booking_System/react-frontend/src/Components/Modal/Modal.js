@@ -20,13 +20,17 @@ const Modal = (props) => {
         document.getElementById("lblName").innerHTML = "Total: $" + (document.getElementById("tickets").selectedIndex + 1)*8.5
     };
 
-    
     return (
         <div className="modal">
             <div className="modal-content">
                 <div className="modal-header">
+                    <div className="btn2">
+                        <button id="close" onClick={() => {handleClose(true);}} >Close</button>
+                    </div>
                     <h1 className="modal-title">{props.movieData.title}</h1>
-                    <img src={props.movieData.imageUrl} alt="" />
+                    <div className="moviePoster">
+                        <img src={props.movieData.imageUrl} alt="" />
+                    </div>
                 </div>
                 <hr></hr>
                 <div className="modal-body">
@@ -64,7 +68,6 @@ const Modal = (props) => {
                 <div className="modal-footer">
                     <div className="btn">
                         <button id="pay" onClick={() => {handleClick(true);}} >Pay</button>
-                        <button id="close" onClick={() => {handleClose(true);}} >Close</button>
                     </div>
                 </div>
                 {success ? <OperationSuccessfulComponent message={"successfully Emailed your tickets"}/> : null}
