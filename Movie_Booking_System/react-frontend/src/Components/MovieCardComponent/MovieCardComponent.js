@@ -66,6 +66,8 @@ const MovieCardComponent = (props) => {
         }
         else{
             console.log("WE ARE GOING TO REMOVE", isBookmarked)
+            console.log("request in delete is ",request)
+
             const del_result = Axios.delete('http://127.0.0.1:5000/user/bookmark/delete',{data: request}).then(
                 (response) => {
                     if (response.data.status) {

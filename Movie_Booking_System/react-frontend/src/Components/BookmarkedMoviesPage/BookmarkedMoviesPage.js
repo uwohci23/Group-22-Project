@@ -4,7 +4,7 @@ import MovieCardComponent from '../MovieCardComponent/MovieCardComponent.js'
 import Axios from "axios";
 import NavBar from '../NavBar/NavBar.js';
 
-const BookmarkedMoviesPage = (navBarUserid,) => {
+const BookmarkedMoviesPage = ({navBarUserid}) => {
     console.log(navBarUserid)
     const [movieList, setMovieList] = React.useState([]);
     const [originalMovieList, setOriginalMovieList] = React.useState([]);
