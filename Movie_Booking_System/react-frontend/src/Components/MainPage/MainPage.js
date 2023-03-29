@@ -50,7 +50,7 @@ const MainPage = (props) => {
     const handleSearchQuery = (query) => {
         setSearchQuery(query);
         if(query !== ''){
-            const refinedMovieList = movieList.filter((movie) => {
+            const refinedMovieList = originalMovieList.filter((movie) => {
                 return movie.title.toLowerCase().includes(query.toLowerCase());
               });
             setMovieList(refinedMovieList)           
@@ -60,11 +60,14 @@ const MainPage = (props) => {
         }
 
     }
+    React.useEffect(() => {
+        console.log("test")
+    },[document.getElementsByClassName('inputFieldSearch')])
 
     return(
 
         <div className="mainCover">
-            <NavBar setShowLogin={props.setShowLogin} navBarUsername={props.navBarUsername} setSearchQuery={handleSearchQuery}/>
+            <NavBar setShowLogin={props.setShowLogin} navBarUsername={props.navBarUsername} setSearchQuery={handleSearchQuery} />
             {showMoviesbutton ?
             <div className="buttonWrapper">
                 <button className="showMoviesButton" onClick={handleList}>SEE LIST OF MOVIES</button>
