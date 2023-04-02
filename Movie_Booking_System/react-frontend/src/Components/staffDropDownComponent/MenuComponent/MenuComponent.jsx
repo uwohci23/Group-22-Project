@@ -1,6 +1,9 @@
 import React from 'react';
 import "./MenuComponent.css";
 import { motion } from 'framer-motion';
+import Axios from "axios";
+import MovieCardComponent from "../../MovieCardComponent/MovieCardComponent";
+
 
 const menuVariants = {
     open: { rotate: 180, transition: { duration: 0.2 }},
@@ -28,26 +31,63 @@ const listVariants = {
     }
 }
 
-const itemVariants = {
-    open: {
-        opacity: 1,
-        y: 0,
-        transition: { 
-            type: "spring",
-            stiffness: 300,
-            damping: 24
-         }
-    },
-    closed: {
-        opacity: 0,
-        y: 20,
-        transition: {
-            duration: 0.2
-        }
-    }
-}
+// const itemVariants = {
+//     open: {
+//         opacity: 1,
+//         y: 0,
+//         transition: { 
+//             type: "spring",
+//             stiffness: 300,
+//             damping: 24
+//          }
+//     },
+//     closed: {
+//         opacity: 0,
+//         y: 20,
+//         transition: {
+//             duration: 0.2
+//         }
+//     }
+// }
+
+
 
 const MenuComponent = ({ isOpen, setIsOpen }) => {
+
+
+    const [movieList, setMovieList] = React.useState([]);
+    const [searchMovies, setSearchMovies] = React.useState(null);
+    React.useEffect(() => {
+        handleList();
+    }, [])
+
+    const handleSearchQuery = (query) => {
+
+        if(query !== ''){
+            const refinedMovieList = movieList.filter((movie) => {
+                return movie.title.toLowerCase().includes(query.toLowerCase());
+              });
+            setSearchMovies(refinedMovieList);    
+        }
+        else{
+            setSearchMovies(movieList);
+        }
+
+    }
+    // request for all movies
+    // NEEDS TO BE ASYNC SO THAT RENDERING ACTUALLY GETS MOVIES
+    const handleList = async () => {
+        const result = await Axios.get("http://127.0.0.1:5000/movie/list").then(
+            (response) => {
+                if (response.status < 400) {
+                    setMovieList(response.data);
+                    // setSearchMovies(response.data);
+                }else {
+                    setMovieList([]);
+                }
+            }
+        )
+    }
   return (
     <motion.nav 
         className="menu"
@@ -59,7 +99,7 @@ const MenuComponent = ({ isOpen, setIsOpen }) => {
             onClick={() => setIsOpen(!isOpen)}
             whileTap={{ scale: 0.97 }}
         >
-            Menu
+            View Movies on Display
             <motion.div 
                 variants={menuVariants}
             >
@@ -68,16 +108,25 @@ const MenuComponent = ({ isOpen, setIsOpen }) => {
                 </svg>
             </motion.div>
         </motion.button>
-        <motion.ul 
-            className="listCover"
-            variants={ listVariants }
-        >
-            <motion.li className='listItemDropdown' variants={ itemVariants }>item 1</motion.li>
-            <motion.li className='listItemDropdown' variants={ itemVariants }>item 2</motion.li>
-            <motion.li className='listItemDropdown' variants={ itemVariants }>item 3</motion.li>
-            <motion.li className='listItemDropdown' variants={ itemVariants }>item 4</motion.li>
-            <motion.li className='listItemDropdown' variants={ itemVariants }>item 5</motion.li>
-        </motion.ul>
+        <motion.div className="currentMoviesWrapper">
+            <motion.ul
+                className="listCover"
+                variants={ listVariants }
+            >
+                <input
+                    type="text"
+                    placeholder="Search movies..."
+                    onChange={(event) => handleSearchQuery(event.target.value)}
+                    className="searchBarStaff"
+
+                >
+                </input>
+                {searchMovies ? searchMovies.map((movie) => {
+                        return <MovieCardComponent className="listItemDropdown" key={movie.id} title={movie.title} imageUrl={movie.image_url}
+                        releaseDate={movie.release_date}/>
+                    }) : <h4>Search For a movie</h4>}
+            </motion.ul>
+        </motion.div>
     </motion.nav>
   )
 }

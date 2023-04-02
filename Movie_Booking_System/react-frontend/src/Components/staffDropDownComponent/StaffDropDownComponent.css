@@ -3,5 +3,6 @@
     justify-content: center;
     align-items: center; */
     min-height: 30vh;
-    background-color: #141a24;
+    max-width: 300px;
+    /* background-color: #141a24; */
 }
