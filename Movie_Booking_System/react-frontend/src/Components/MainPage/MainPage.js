@@ -61,7 +61,7 @@ const MainPage = (props) => {
 
     }
     React.useEffect(() => {
-        console.log("test")
+        console.log("inputFieldSearch change test");
     },[document.getElementsByClassName('inputFieldSearch')])
 
     return(

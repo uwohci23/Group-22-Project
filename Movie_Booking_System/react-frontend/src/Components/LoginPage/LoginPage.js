@@ -38,7 +38,7 @@ const LoginComponent = ({userName,setUserName,setUserid}) => {
 
                         setUserName(username);
                         // if successful, populate local storage with user name
-                        window.localStorage.setItem("MAIN_USERNAME", JSON.stringify(userName));
+                        window.localStorage.setItem("MAIN_USERNAME", JSON.stringify(username));
                         setUserid(response.data.userid)
                         navigate("/admin");
                     } else {
@@ -46,7 +46,7 @@ const LoginComponent = ({userName,setUserName,setUserid}) => {
                         setUserName(username);
 
                         // if successful, populate local storage with user name
-                        window.localStorage.setItem("MAIN_USERNAME", JSON.stringify(userName));
+                        window.localStorage.setItem("MAIN_USERNAME", JSON.stringify(username));
                         setUserid(response.data.userid)
                         navigate("/main");
                     }

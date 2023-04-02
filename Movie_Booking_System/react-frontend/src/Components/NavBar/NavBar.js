@@ -8,11 +8,13 @@ const NavBar = ({setSearchQuery}) => {
     const [displayUserName, setDisplayUserName] = React.useState(null);
 
     React.useEffect(() => {
+        console.log("function call");
         const data = window.localStorage.getItem("MAIN_USERNAME");
         if (data !== null) {
+            console.log("good username");
             setDisplayUserName(JSON.parse(data));
         }
-    }, [])
+    }, []);
     
     const navigate = useNavigate();
 
