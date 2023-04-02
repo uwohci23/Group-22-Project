@@ -1,0 +1,70 @@
+<form action="" method="get" onSubmit={handleSubmit} className="form">
+                <h1 className="loginTitle">Register</h1>
+
+                {/* {inputs.map((input) => {
+                   return <FormInput
+                        key = {input.id}
+                        {...input}
+                        value={values[input.name]} 
+                        onChange={onChange}
+                    /> 
+                })} */}
+                <div className="row">
+                    <FormInput
+                        key = {inputs[0].id}
+                        {...inputs[0]}
+                        value={values[inputs[0].name]}
+                        onChange={onChange}
+                    />
+                    <FormInput
+                        key = {inputs[1].id}
+                        {...inputs[1]}
+                        value={values[inputs[1].name]}
+                        onChange={onChange}
+                    />
+                </div>
+                <div className="row">
+                    <FormInput
+                        key = {inputs[2].id}
+                        {...inputs[2]}
+                        value={values[inputs[2].name]}
+                        onChange={onChange}
+                    />
+                    <FormInput
+                        key = {inputs[3].id}
+                        {...inputs[3]}
+                        value={values[inputs[3].name]}
+                        onChange={onChange}
+                    />
+                </div>
+                <div className="row">
+                    <FormInput
+                        key = {inputs[4].id}
+                        {...inputs[4]}
+                        value={values[inputs[4].name]}
+                        onChange={onChange}
+                    />
+                    <FormInput
+                        key = {inputs[5].id}
+                        {...inputs[5]}
+                        value={values[inputs[5].name]}
+                        onChange={onChange}
+                    />
+                </div>
+                {/* <button className="registerSubmitButton">Submit</button> */}
+                <div
+                    className="container"
+                    onMouseDown={handleMouseDown}
+                    onMouseUp={handleMouseUp}>
+                    <motion.div
+                        className="fill"
+                        animate={isAnimating ? { width: "100%" } : { width: "0%" }}
+                        transition={{ duration: isAnimating? 1:0.2, ease: "linear" }}
+                    />
+                    <div className="text">
+                        <span>Register</span>
+                    </div>
+                </div>
+                {requestError ? <OperationFailedComponent error={"Could not Register User"} /> : null}
+                {requestGood ? <OperationSuccessfulComponent message={"User successfully Created"} /> : null}
+            </form>
