@@ -67,7 +67,7 @@ const MainPage = (props) => {
     return(
 
         <div className="mainCover">
-            <NavBar setShowLogin={props.setShowLogin} navBarUsername={props.navBarUsername} setSearchQuery={handleSearchQuery} />
+            <NavBar setSearchQuery={handleSearchQuery} />
             {showMoviesbutton ?
             <div className="buttonWrapper">
                 <button className="showMoviesButton" onClick={handleList}>SEE LIST OF MOVIES</button>

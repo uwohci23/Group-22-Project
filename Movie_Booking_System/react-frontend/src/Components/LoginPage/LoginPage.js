@@ -4,7 +4,7 @@ import { useNavigate  } from "react-router-dom";
 import OperationFailedComponent from "../OperationFailedComponent/OperationFailedComponent";
 import React from "react";
 
-const LoginComponent = ({setUserName,setUserid}) => {
+const LoginComponent = ({userName,setUserName,setUserid}) => {
     const navigate = useNavigate();
 
     const [requestError, setRequestError] = React.useState(false);
@@ -37,11 +37,16 @@ const LoginComponent = ({setUserName,setUserid}) => {
                     if (response.data.admin_status > 0) {
 
                         setUserName(username);
+                        // if successful, populate local storage with user name
+                        window.localStorage.setItem("MAIN_USERNAME", JSON.stringify(userName));
                         setUserid(response.data.userid)
                         navigate("/admin");
                     } else {
                         setPageToShow(["normal", username]);
                         setUserName(username);
+
+                        // if successful, populate local storage with user name
+                        window.localStorage.setItem("MAIN_USERNAME", JSON.stringify(userName));
                         setUserid(response.data.userid)
                         navigate("/main");
                     }

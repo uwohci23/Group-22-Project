@@ -70,7 +70,7 @@ const MenuComponent = ({ isOpen, setIsOpen }) => {
             setSearchMovies(refinedMovieList);    
         }
         else{
-            setSearchMovies(movieList);
+            setSearchMovies(null);
         }
 
     }
