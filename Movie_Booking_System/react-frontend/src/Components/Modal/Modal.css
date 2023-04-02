@@ -108,6 +108,8 @@
   .container {
     perspective: 1000px;
     margin-bottom: 30px;
+    justify-content: center;
+    align-items: center;
   }
   
   .seat {
@@ -192,3 +194,43 @@ hr {
     width: 70%;
     height: 50%;
  }
+ .combo{
+  /* position: fixed; */
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.combo-content{
+  justify-content: center;
+  width:500px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
+  padding:20px
+}
+.combo-body{
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+.combo-footer{
+  padding:10px
+}
+
+.combo-header{
+  display: flex;
+  justify-content: center;
+  margin: 0;
+}
+
+.combo-title{
+  display: flex;
+  justify-content: center;
+  margin: 0;
+}
