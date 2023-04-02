@@ -6,7 +6,7 @@ import React from "react";
 import { AnimatePresence } from "framer-motion";
 import RegisterUser from "../RegisterUserComponent/RegisterUser";
 import StaffPage from "../StaffPage/StaffPage";
-import StaffDropDownComponent from "../StaffDropDownComponent/StaffDropDownComponent";
+//import StaffDropDownComponent from "../StaffDropDownComponent/StaffDropDownComponent";
 import BookmarkedMoviesPage from "../BookmarkedMoviesPage/BookmarkedMoviesPage";
 
 function AnimatedRoutes() {

@@ -43,69 +43,69 @@ const Modal = (props) => {
                     <hr></hr>
                 </div>
                 <div className="modal-footer">
-                    <div class="container">
-                        <div class="screen"></div>
+                    <div cclassName="container">
+                        <div cclassName="screen"></div>
 
-                            <div class="row">
-                                <div class="seat"></div>
-                                    <div class="seat"></div>
-                                    <div class="seat"></div>
-                                    <div class="seat"></div>
-                                    <div class="seat"></div>
-                                    <div class="seat"></div>
-                                    <div class="seat"></div>
-                                    <div class="seat"></div>
+                            <div className="row">
+                                <div className="seat"></div>
+                                    <div className="seat"></div>
+                                    <div className="seat"></div>
+                                    <div className="seat"></div>
+                                    <div className="seat"></div>
+                                    <div className="seat"></div>
+                                    <div className="seat"></div>
+                                    <div className="seat"></div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="seat"></div>
-                                    <div class="seat"></div>
-                                    <div class="seat"></div>
-                                    <div class="seat sold"></div>
-                                    <div class="seat sold"></div>
-                                    <div class="seat"></div>
-                                    <div class="seat"></div>
-                                    <div class="seat"></div>
+                                <div className="row">
+                                    <div className="seat"></div>
+                                    <div className="seat"></div>
+                                    <div className="seat"></div>
+                                    <div className="seat sold"></div>
+                                    <div className="seat sold"></div>
+                                    <div className="seat"></div>
+                                    <div className="seat"></div>
+                                    <div className="seat"></div>
                                 </div>
-                                <div class="row">
-                                    <div class="seat"></div>
-                                    <div class="seat"></div>
-                                    <div class="seat"></div>
-                                    <div class="seat"></div>
-                                    <div class="seat"></div>
-                                    <div class="seat"></div>
-                                    <div class="seat sold"></div>
-                                    <div class="seat sold"></div>
+                                <div className="row">
+                                    <div className="seat"></div>
+                                    <div className="seat"></div>
+                                    <div className="seat"></div>
+                                    <div className="seat"></div>
+                                    <div className="seat"></div>
+                                    <div className="seat"></div>
+                                    <div className="seat sold"></div>
+                                    <div className="seat sold"></div>
                                 </div>
-                                <div class="row">
-                                    <div class="seat"></div>
-                                    <div class="seat"></div>
-                                    <div class="seat"></div>
-                                    <div class="seat"></div>
-                                    <div class="seat"></div>
-                                    <div class="seat"></div>
-                                    <div class="seat"></div>
-                                    <div class="seat"></div>
+                                <div className="row">
+                                    <div className="seat"></div>
+                                    <div className="seat"></div>
+                                    <div className="seat"></div>
+                                    <div className="seat"></div>
+                                    <div className="seat"></div>
+                                    <div className="seat"></div>
+                                    <div className="seat"></div>
+                                    <div className="seat"></div>
                                 </div>
-                                <div class="row">
-                                    <div class="seat"></div>
-                                    <div class="seat"></div>
-                                    <div class="seat"></div>
-                                    <div class="seat sold"></div>
-                                    <div class="seat sold"></div>
-                                    <div class="seat"></div>
-                                    <div class="seat"></div>
-                                    <div class="seat"></div>
+                                <div className="row">
+                                    <div className="seat"></div>
+                                    <div className="seat"></div>
+                                    <div className="seat"></div>
+                                    <div className="seat sold"></div>
+                                    <div className="seat sold"></div>
+                                    <div className="seat"></div>
+                                    <div className="seat"></div>
+                                    <div className="seat"></div>
                                 </div>
-                                <div class="row">
-                                    <div class="seat"></div>
-                                    <div class="seat"></div>
-                                    <div class="seat"></div>
-                                    <div class="seat"></div>
-                                    <div class="seat sold"></div>
-                                    <div class="seat sold"></div>
-                                    <div class="seat sold"></div>
-                                    <div class="seat"></div>
+                                <div className="row">
+                                    <div className="seat"></div>
+                                    <div className="seat"></div>
+                                    <div className="seat"></div>
+                                    <div className="seat"></div>
+                                    <div className="seat sold"></div>
+                                    <div className="seat sold"></div>
+                                    <div className="seat sold"></div>
+                                    <div className="seat"></div>
                                 </div>
                                 </div>
                 <div className="modal-body4">
