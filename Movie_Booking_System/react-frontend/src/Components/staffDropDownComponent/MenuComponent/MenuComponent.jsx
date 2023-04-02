@@ -31,24 +31,24 @@ const listVariants = {
     }
 }
 
-const itemVariants = {
-    open: {
-        opacity: 1,
-        y: 0,
-        transition: { 
-            type: "spring",
-            stiffness: 300,
-            damping: 24
-         }
-    },
-    closed: {
-        opacity: 0,
-        y: 20,
-        transition: {
-            duration: 0.2
-        }
-    }
-}
+// const itemVariants = {
+//     open: {
+//         opacity: 1,
+//         y: 0,
+//         transition: { 
+//             type: "spring",
+//             stiffness: 300,
+//             damping: 24
+//          }
+//     },
+//     closed: {
+//         opacity: 0,
+//         y: 20,
+//         transition: {
+//             duration: 0.2
+//         }
+//     }
+// }
 
 
 
@@ -63,7 +63,7 @@ const MenuComponent = ({ isOpen, setIsOpen }) => {
 
     const handleSearchQuery = (query) => {
 
-        if(query != ''){
+        if(query !== ''){
             const refinedMovieList = movieList.filter((movie) => {
                 return movie.title.toLowerCase().includes(query.toLowerCase());
               });
@@ -81,7 +81,7 @@ const MenuComponent = ({ isOpen, setIsOpen }) => {
             (response) => {
                 if (response.status < 400) {
                     setMovieList(response.data);
-                    setSearchMovies(response.data);
+                    // setSearchMovies(response.data);
                 }else {
                     setMovieList([]);
                 }
