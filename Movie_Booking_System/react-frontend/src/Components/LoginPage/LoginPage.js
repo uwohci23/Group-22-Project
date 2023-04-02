@@ -46,7 +46,7 @@ const LoginComponent = ({userName,setUserName,setUserid}) => {
                         await new Promise(resolve => setTimeout(resolve, 1000));
                         setPageToShow(["normal", username]);
                         setUserName(username);
- 
+                        
                         // if successful, populate local storage with user name
                         window.localStorage.setItem("MAIN_USERNAME", JSON.stringify(username));
                         setUserid(response.data.userid)
