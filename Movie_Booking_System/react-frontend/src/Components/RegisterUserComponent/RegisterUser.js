@@ -10,8 +10,10 @@ import { BsArrowLeft } from 'react-icons/bs';
 import { IoCheckmarkCircleSharp } from 'react-icons/io5';
 import { VscError } from 'react-icons/vsc';
 import { Link } from "react-router-dom";
+import { useNavigate  } from "react-router-dom";
 
 const RegisterUser = ({setShowRegister}) => {
+    const navigate = useNavigate();
     // make input states
     const [values, setValues] = React.useState({
         username: "",
@@ -62,7 +64,7 @@ const RegisterUser = ({setShowRegister}) => {
 
     // handle login display after user register
     const handleShow = (state) => {
-        setShowRegister(state);
+        navigate("/");
     }
 
     // handle form submission

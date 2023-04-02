@@ -6,19 +6,23 @@ import NavBar from "../NavBar/NavBar";
 import Axios from "axios";
 import OperationFailedComponent from "../OperationFailedComponent/OperationFailedComponent";
 import OperationSuccessfulComponent from "../OperationSuccessfulComponent/OperationSuccessfulComponent";
+import StaffDropDownComponent from "../StaffDropDownComponent/StaffDropDownComponent";
 
 // MAIN COMPONENT, LOGIN PAGE MAIN
-const StaffPage = ({setShowLogin, navBarUsername}) => {
+const StaffPage = () => {
     const [requestError, setRequestError] = React.useState(false);
     const [requestGood, setRequestGood] = React.useState(false);
 
     const handleMoviePost = (data) => {
+        // set up new movie request
         const request = {
             title: data.title,
             image_url: data.imageUrl,
             release_date: data.releaseDate,
             age_rating: data.ageRating,
         };
+
+        // make Axios Request
         const result = Axios.post("http://127.0.0.1:5000/movie/add", request).then(
             (response) => {
                 if (response.data.status) {
@@ -90,29 +94,31 @@ const StaffPage = ({setShowLogin, navBarUsername}) => {
 
     return (
         <div className="staffMain">
-            <NavBar setShowLogin={setShowLogin} navBarUsername={navBarUsername}/>
-            <div className="staffCover">
-                {/* <NavBar setShowLogin={setShowLogin}/> */}
-                <form action="" onSubmit={handleSubmit} className="staffForm">
-                    <h1 className="staffTitle">Create a Movie</h1>
-                    {inputs.map((input) => {
-                    return <StaffInput
-                            key = {input.id}
-                            {...input}
-                            value={values[input.name]} 
-                            onChange={onChange}
-                        /> 
-                    })}
-                    <button className="movieSubmitButton">Submit</button>
-                    {requestError ? <OperationFailedComponent error={"Failed to post movie"} /> : null}
-                    {requestGood ? <OperationSuccessfulComponent message={"Movie successfully Created"} /> : null}
-                </form>
+            <NavBar />
+            <div className="mainComponentsCover">
+                <StaffDropDownComponent className="dropDownMoviesMenu"/>
+                <div className="staffCover">
+                    <form action="" onSubmit={handleSubmit} className="staffForm">
+                        <h1 className="staffTitle">Create a Movie</h1>
+                        {inputs.map((input) => {
+                        return <StaffInput
+                                key = {input.id}
+                                {...input}
+                                value={values[input.name]} 
+                                onChange={onChange}
+                            /> 
+                        })}
+                        <button className="movieSubmitButton">Submit</button>
+                        {requestError ? <OperationFailedComponent error={"Failed to post movie"} /> : null}
+                        {requestGood ? <OperationSuccessfulComponent message={"Movie successfully Created"} /> : null}
+                    </form>
+                    
+                    <div className="moviePreview">
+                        <h3>Posting Preview</h3>
+                        <MovieCardComponent title={values.title} imageUrl={values.imageUrl} releaseDate={values.releaseDate}/>
+                    </div>
                 
-                <div className="moviePreview">
-                    <h3>Posting Preview</h3>
-                    <MovieCardComponent title={values.title} imageUrl={values.imageUrl} releaseDate={values.releaseDate}/>
                 </div>
-            
             </div>
         </div>
      );

@@ -55,6 +55,15 @@ class Database:
                 current_seats INTEGER
             )
         ''')
+        self.cursor.execute('''
+            CREATE TABLE IF NOT EXISTS bookmarks ( 
+            bookmark_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER,
+            movie_id INTEGER,
+            FOREIGN KEY (user_id) REFERENCES user(user_id),
+            FOREIGN KEY (movie_id) REFERENCES movie(movie_id)
+            )
+        ''')
         self.connection.commit()
 
     def add_movie(self, title: str, image_url: str, release_date: str, age_rating: str) -> bool:
@@ -83,12 +92,12 @@ class Database:
     def get_user_by_username(self, username: str) -> typing.Optional[dict]:
         self.cursor.execute('''
             SELECT * FROM user WHERE username = ?
-        ''', (username,))
+        ''', (username,))       
         data = self.cursor.fetchone()
         if data is None:
             return None
         return {
-            'user_id': data[0],
+            'user_id':  data[0],
             'username': data[1],
             'priv_key': data[2],
             'hash_password': data[3],
@@ -96,7 +105,7 @@ class Database:
             'first_name': data[5],
             'last_name': data[6],
             'admin_status': data[7]
-        }
+        } 
     
     def get_user_by_id(self, user_id: str) -> typing.Optional[dict]:
         self.cursor.execute('''
@@ -227,3 +236,79 @@ class Database:
             return True
         except sqlite3.Error:
             return False
+
+
+    def get_bookmarks(self, user_id:int) -> typing.Optional[dict]:
+        self.cursor.execute(''' 
+            SELECT bookmarks.movie_id,movie.title,movie.image_url,movie.release_date,movie.age_rating,bookmarks.user_id
+            FROM bookmarks 
+            INNER JOIN movie ON bookmarks.movie_id = movie.movie_id
+            WHERE bookmarks.user_id = ?''',(user_id,))
+        
+        bookmarks = self.cursor.fetchall()
+        print(bookmarks)
+        if bookmarks:
+            return [{
+            'movie_id': row[0],
+            'title': row[1],
+            'image_url': row[2],
+            'release_date': row[3],
+            'age_rating': row[4],
+            'user_id': row[5]
+                
+            } for row in bookmarks]
+        else: 
+            return None
+
+        
+    def add_bookmark(self,user_id: int, movie_id: str) -> bool:
+        try: 
+            self.cursor.execute('INSERT INTO bookmarks (user_id, movie_id) VALUES (?, ?)', (user_id, movie_id))
+            self.connection.commit()
+            return True
+        except sqlite3.Error as error:
+            print('Failed to add bookmark:', error)
+            return False
+        
+    def delete_bookmark(self,user_id: int, movie_id: str) -> bool:
+        try: 
+            self.cursor.execute('DELETE FROM bookmarks WHERE user_id = ? AND movie_id =?', (user_id, movie_id))
+            self.connection.commit()
+            return True
+        except sqlite3.Error as error:
+            print('Failed to add bookmark:', error)
+            return False
+        
+
+    def get_all_bookmarks(self) -> typing.List[dict]:
+        self.cursor.execute('''
+            SELECT * FROM bookmarks
+        ''')
+        data = self.cursor.fetchall()
+        if data is None:
+            return []
+        return [{
+            'bookmark_id': row[0],
+            'user_id': row[1],
+            'movie_id': row[2],
+        } for row in data]
+
+    def get_all_users(self) -> typing.Optional[dict]:
+        
+        self.cursor.execute('''
+            SELECT * FROM user
+        ''')
+        data = self.cursor.fetchall()
+        if data is None:
+            return None
+        return [{
+            'user_id': row[0],
+            'username': row[1],
+            'priv_key': row[2],
+            'hash_password': row[3],
+            'email': row[4],
+            'first_name': row[5],
+            'last_name': row[6],
+            'admin_status': row[7]
+        } for row in data]
+    
