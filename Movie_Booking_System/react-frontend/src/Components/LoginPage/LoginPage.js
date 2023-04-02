@@ -2,14 +2,14 @@ import "./LoginPage.css";
 import Axios from "axios";
 import { useNavigate  } from "react-router-dom";
 import OperationFailedComponent from "../OperationFailedComponent/OperationFailedComponent";
-import React from "react";
+import React, { useState } from 'react';
 
 const LoginComponent = ({userName,setUserName,setUserid}) => {
     const navigate = useNavigate();
 
     const [requestError, setRequestError] = React.useState(false);
     const [pageToShow, setPageToShow] = React.useState(false);
-
+    const [loginStatus, setLoginStatus] = useState(null);
     // Get username from input field
     const getUsername = () => {
         const username = document.getElementById("username");
@@ -31,7 +31,7 @@ const LoginComponent = ({userName,setUserName,setUserid}) => {
         const request = {username: username, password: password};
         
         const result = Axios.post("http://127.0.0.1:5000/user/login", request).then(
-            (response) => {
+            async (response) => {
                 if (response.data.status) {
                     // login is successful, check for admin
                     if (response.data.admin_status > 0) {
@@ -42,9 +42,11 @@ const LoginComponent = ({userName,setUserName,setUserid}) => {
                         setUserid(response.data.userid)
                         navigate("/admin");
                     } else {
+                        setLoginStatus('success');
+                        await new Promise(resolve => setTimeout(resolve, 1000));
                         setPageToShow(["normal", username]);
                         setUserName(username);
-
+ 
                         // if successful, populate local storage with user name
                         window.localStorage.setItem("MAIN_USERNAME", JSON.stringify(username));
                         setUserid(response.data.userid)
@@ -52,7 +54,10 @@ const LoginComponent = ({userName,setUserName,setUserid}) => {
                     }
 
                 }
-        }).catch((error) => {setRequestError(true);});
+        }).catch((error) => {
+            setRequestError(true);
+            setLoginStatus('failure');
+        });
     }
 
     return ( 
@@ -60,8 +65,8 @@ const LoginComponent = ({userName,setUserName,setUserid}) => {
             <form action="" method="post">
                 <div className="loginPage">
                     <h1>Firestone Project</h1>
-                    <input className="loginInput" id="username" type="text" placeholder="username" />
-                    <input className="loginInput" id ="password" type="password" placeholder="password" />
+                    <input placeholder = "username" id="username" type="text" className={`loginInput ${loginStatus === 'failure' ? 'failure' : (loginStatus === 'success' ? 'success' : '')}`} />
+                    <input placeholder = "password" id="password" type="password" className={`loginInput ${loginStatus === 'failure' ? 'failure' : (loginStatus === 'success' ? 'success' : '')}`} />
 
                     <div className="login-btn" onClick= {() => {handleLoginRequest(true);}}>Login</div>
                     <div className="alt-login">
