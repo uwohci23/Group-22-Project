@@ -7,11 +7,11 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    background-color: #040608;
+    /* background-color: #040608; */
 }
 
 .listItemDropdown {
-    color: rgb(0, 180, 203);
+    /* color: rgb(0, 180, 203); */
     cursor: pointer;
     display: block;
     list-style: none;
@@ -31,12 +31,22 @@
     width: 100%;
     padding: 10px 20px;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     margin-bottom: 10px;
-    background-color: #040608;
-    color: rgb(0, 180, 203);
+    background-color: rgb(84, 68, 225);
+    color: white;
 }
 
 .menuButton path {
-    fill: rgb(0, 180, 203);
+    fill: white;
+}
+
+.currentMoviesWrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.searchBarStaff {
+    margin-right: 10px;
 }

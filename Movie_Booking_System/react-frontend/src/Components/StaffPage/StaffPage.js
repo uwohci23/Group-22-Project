@@ -6,10 +6,10 @@ import NavBar from "../NavBar/NavBar";
 import Axios from "axios";
 import OperationFailedComponent from "../OperationFailedComponent/OperationFailedComponent";
 import OperationSuccessfulComponent from "../OperationSuccessfulComponent/OperationSuccessfulComponent";
-import StaffDropDownComponent from "../staffDropDownComponent/StaffDropDownComponent";
+import StaffDropDownComponent from "../StaffDropDownComponent/StaffDropDownComponent";
 
 // MAIN COMPONENT, LOGIN PAGE MAIN
-const StaffPage = ({setShowLogin, navBarUsername}) => {
+const StaffPage = () => {
     const [requestError, setRequestError] = React.useState(false);
     const [requestGood, setRequestGood] = React.useState(false);
 
@@ -94,11 +94,10 @@ const StaffPage = ({setShowLogin, navBarUsername}) => {
 
     return (
         <div className="staffMain">
-            <NavBar setShowLogin={setShowLogin} navBarUsername={navBarUsername}/>
+            <NavBar />
             <div className="mainComponentsCover">
                 <StaffDropDownComponent className="dropDownMoviesMenu"/>
                 <div className="staffCover">
-                    {/* <NavBar setShowLogin={setShowLogin}/> */}
                     <form action="" onSubmit={handleSubmit} className="staffForm">
                         <h1 className="staffTitle">Create a Movie</h1>
                         {inputs.map((input) => {
