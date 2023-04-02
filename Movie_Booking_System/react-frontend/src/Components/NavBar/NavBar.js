@@ -3,8 +3,19 @@ import "./NavBar.css";
 import { useNavigate  } from "react-router-dom";
 import {  FaBookmark } from 'react-icons/fa'
 
-const NavBar = ({setShowLogin, navBarUsername,setSearchQuery}) => {
+const NavBar = ({setSearchQuery}) => {
 
+    const [displayUserName, setDisplayUserName] = React.useState(null);
+
+    React.useEffect(() => {
+        console.log("function call");
+        const data = window.localStorage.getItem("MAIN_USERNAME");
+        if (data !== null) {
+            console.log("good username");
+            setDisplayUserName(JSON.parse(data));
+        }
+    }, []);
+    
     const navigate = useNavigate();
 
     const handleLogout = (state) => {
@@ -36,7 +47,7 @@ const NavBar = ({setShowLogin, navBarUsername,setSearchQuery}) => {
                     </input>
                     </li>
 
-                    <li className="listItem">{navBarUsername}</li>
+                    <li className="listItem">{displayUserName}</li>
                     <li className="listItem" onClick = {() => {handleLogout(true)}}>Logout</li>
                 </ul>
             </nav>
