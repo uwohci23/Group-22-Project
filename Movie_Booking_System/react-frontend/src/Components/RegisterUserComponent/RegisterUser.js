@@ -1,9 +1,15 @@
 import React from "react"
 import FormInput from "../FormInput/FormInput"
 import "./RegisterUser.css"
+// import "./test.css"
 import Axios from "axios";
+import { motion, AnimatePresence } from "framer-motion";
 import OperationFailedComponent from "../OperationFailedComponent/OperationFailedComponent";
 import OperationSuccessfulComponent from "../OperationSuccessfulComponent/OperationSuccessfulComponent";
+import { BsArrowLeft } from 'react-icons/bs';
+import { IoCheckmarkCircleSharp } from 'react-icons/io5';
+import { VscError } from 'react-icons/vsc';
+import { Link } from "react-router-dom";
 
 const RegisterUser = ({setShowRegister}) => {
     // make input states
@@ -18,6 +24,41 @@ const RegisterUser = ({setShowRegister}) => {
 
     const [requestError, setRequestError] = React.useState(false);
     const [requestGood, setRequestGood] = React.useState(false);
+
+    const [isAnimating, setIsAnimating] = React.useState(false);
+    const [isAnimationComplete, setIsAnimationComplete] = React.useState(false);
+    const [color, setColor] = React.useState("bg-purple-400");
+    const ref = React.useRef(null);
+
+    const handleMouseDown = () => {
+        if (isAnimationComplete === false) {
+            setIsAnimating(true);
+            setColor("bg-purple-400");
+        }
+    };
+
+    const handleMouseUp = () => {
+        if (isAnimationComplete === false) {
+            setIsAnimating(false);
+            setColor("bg-gray-400");
+        }
+    };
+
+    const handleAnimationComplete = (layout) => {
+        console.log(layout.width);
+        if (ref.current.style.width === "100%") {
+            console.log("Animation complete");
+            // set ref to width 100%
+            ref.current.style.width = "100%";
+            setIsAnimationComplete(true);
+            if (requestGood === true && requestError === false) {
+                setColor("bg-green-400");
+            }
+            if (requestGood === false && requestError === true) {
+                setColor("bg-red-400");
+            }
+        }
+    };
 
     // handle login display after user register
     const handleShow = (state) => {
@@ -119,27 +160,127 @@ const RegisterUser = ({setShowRegister}) => {
         },
     ]
 
+    const [isOpen, setIsOpen] = React.useState(false);
+
+    const toggleOpen = () => setIsOpen(!isOpen);
+
+    const icon = () => {
+        // if the request was successful
+        if (requestGood === true && requestError === false) {
+            <motion.span
+                className="flex absolute text-4xl"
+                initial={{scale:0}}
+                animate={{scale:1}}
+                transition={{duration:0.3}}>
+                    <IoCheckmarkCircleSharp />
+            </motion.span>
+        }
+
+        // if the request was not successful
+        if (requestError === true) {
+            <motion.span
+                className="flex absolute text-4xl"
+                initial={{scale:0}}
+                animate={{scale:1}}
+                transition={{duration:0.3}}>
+                    <VscError />
+            </motion.span>
+        };
+
+    };
+
     // console.log(values);
     return ( 
-        <div className="registerCover">
-            <form action="" method="get" onSubmit={handleSubmit} className="registerForm">
-                <h1 className="loginTitle">Register</h1>
+        <div className="flex flex-col w-screen h-screen justify-center bg-gradient-to-r from-violet-500 to-purple-500">
+            <h1 className="flex relative w-full h-32 justify-center items-center">
+                <span className="flex text-5xl font-semibold text-purple-100">Register Now</span>
+            </h1>
+            <div className="flex w-full h-full justify-center items-end overflow-hidden">
+                <AnimatePresence>
+                    <motion.div
+                        className="flex flex-col w-1/2 h-5/6 rounded-t-3xl shadow-lg shadow-black bg-gray-100"
+                        initial={{y: '100%'}}
+                        animate={{y: 0}}
+                        transition={{duration: 0.3}}>
+                        
+                        {/* Back button */}
+                        <Link to="/" className="flex w-fit h-fit flex-row relative left-5 top-5 space-x-1 cursor-pointer hover:text-blue-500 group">
+                            <BsArrowLeft className="flex relative top-1 duration-100 group-hover:-translate-x-1" />
+                            <span className="flex">Back</span>
+                        </Link>
 
-                {inputs.map((input) => {
-                   return <FormInput
-                        key = {input.id}
-                        {...input}
-                        value={values[input.name]} 
-                        onChange={onChange}
-                    /> 
-                })}
-                <button className="registerSubmitButton">Submit</button>
-                {requestError ? <OperationFailedComponent error={"Could not Register User"} /> : null}
-                {requestGood ? <OperationSuccessfulComponent message={"User successfully Created"} /> : null}
-            </form>
-            <button className="goBackButton" onClick={() => {handleShow(false);}}>Home Page</button>
+                        {/* Form */}
+                        <form action="" method="get" onSubmit={handleSubmit} className="flex flex-col w-full h-3/4 p-10 gap-5">
+                            <div className="flex flex-row w-full h-14 gap-5">
+                                <FormInput
+                                    key = {inputs[0].id}
+                                    {...inputs[0]}
+                                    value={values[inputs[0].name]}
+                                    onChange={onChange}
+                                />
+                                <FormInput
+                                    key = {inputs[1].id}
+                                    {...inputs[1]}
+                                    value={values[inputs[1].name]}
+                                    onChange={onChange}
+                                />
+                            </div>
+                            <div className="flex flex-row w-full h-14 gap-5">
+                                <FormInput
+                                    key = {inputs[2].id}
+                                    {...inputs[2]}
+                                    value={values[inputs[2].name]}
+                                    onChange={onChange}
+                                />
+                                <FormInput
+                                    key = {inputs[3].id}
+                                    {...inputs[3]}
+                                    value={values[inputs[3].name]}
+                                    onChange={onChange}
+                                />
+                            </div>
+                            <div className="flex flex-row w-full h-14 gap-5">
+                                <FormInput
+                                    key = {inputs[4].id}
+                                    {...inputs[4]}
+                                    value={values[inputs[4].name]}
+                                    onChange={onChange}
+                                />
+                                <FormInput
+                                    key = {inputs[5].id}
+                                    {...inputs[5]}
+                                    value={values[inputs[5].name]}
+                                    onChange={onChange}
+                                />
+                            </div>
+                            <div
+                                className="flex relative w-full h-14 gap-5 justify-center items-center rounded-md bg-gray-200"
+                                onMouseDown={handleMouseDown}
+                                onMouseUp={handleMouseUp}>
+                                <motion.div
+                                    ref={ref}
+                                    className={`flex absolute w-0 h-full left-0 rounded-md ${color}`}
+                                    animate={isAnimating ? { width: "100%", left:0 } : { width: "0%" }}
+                                    transition={{ duration: isAnimating? 1:0.2, ease: "easeInOut" }}
+                                    onAnimationComplete={handleAnimationComplete}
+                                    layout
+                                />
+                                {isAnimationComplete ? (
+                                <motion.span
+                                className="flex absolute text-4xl"
+                                initial={{scale:0}}
+                                animate={{scale:1}}
+                                transition={{duration:0.3}}><IoCheckmarkCircleSharp /></motion.span>
+                                ) :
+                                (<span className="flex absolute">Register</span>)}
+                                
+                            </div>
+                        </form>
+                    </motion.div>
+                </AnimatePresence>
+            </div>
         </div>
-     );
+    );
 }
  
 export default RegisterUser;
