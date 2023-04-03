@@ -15,9 +15,12 @@
     background: white;
     border-radius: 10px;
     text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 }
 
-.staffModal button {
+.modalButtonCancel {
     color: #444;
     border-color: #444;
     font-weight: bold;
@@ -33,7 +36,18 @@
     opacity: 0.7;
 }
 
+.buttonWrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
 .staffModal p {
     color: #444;
     font-weight: bold;
+}
+
+.modalTitle {
+    font-weight: bold;
+    text-decoration: underline;
 }
