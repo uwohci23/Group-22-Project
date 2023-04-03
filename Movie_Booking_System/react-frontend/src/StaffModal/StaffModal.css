@@ -21,19 +21,34 @@
 }
 
 .modalButtonCancel {
-    color: #444;
-    border-color: #444;
+    color: red;
+    border-color: red;
     font-weight: bold;
     margin-top: 20px;
-    color: black;
+    color: red;
     padding: 10px 30px;
     font-size: 1em;
     background: transparent;
     border-radius: 50px;
-    border: 1px solid black;
+    border: 1px solid red;
     margin: 40px auto 0;
     cursor: pointer;
     opacity: 0.7;
+}
+.modalButtonSubmit {
+    color: rgb(61, 43, 226);
+    border-color: rgb(61, 43, 226);
+    font-weight: bold;
+    margin-top: 20px;
+    color: rgb(61, 43, 226);
+    padding: 10px 30px;
+    font-size: 1em;
+    background: transparent;
+    border-radius: 50px;
+    border: 1px solid rgb(61, 43, 226);
+    margin: 40px auto 0;
+    cursor: pointer;
+    opacity: 0.7;    
 }
 
 .buttonWrapper {

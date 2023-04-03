@@ -52,7 +52,7 @@ const StaffPage = () => {
             placeholder: "Movie Title",
             label: "Movie Title",
             errorMessage: "Movie Title should be at least 1 chars long",
-            pattern: "[a-zA-Z0-9 ]+",
+            pattern: "[a-zA-Z0-9 -]+",
             required: true,
         },
         {

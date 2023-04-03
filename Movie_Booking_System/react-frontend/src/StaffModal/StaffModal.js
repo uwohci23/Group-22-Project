@@ -63,11 +63,11 @@ const StaffModal = ({cardData, showModal, setShowModal }) => {
                                 releaseDate={cardData.releaseDate} bookmark={true} />
                             {/* <p>Testing out</p> */}
                             <motion.div className="buttonWrapper">
-                                <button className="modalButtonCancel"onClick={() => {handleMoviePost(cardData)}}>Submit</button>
+                                <button className="modalButtonSubmit"onClick={() => {handleMoviePost(cardData)}}>Submit</button>
                                 <button className="modalButtonCancel"onClick={() => {setShowModal(!showModal)}}>Cancel</button>
                             </motion.div>
                             <Link to="/admin"></Link>
-                            {success ? <OperationSuccessfulComponent message={"Movie was posted successfully"}/> : null}
+                            {success ? <OperationSuccessfulComponent  className="successMsg" message={"Movie was posted successfully"}/> : null}
                         </motion.div>
                     </motion.div>
                 )

@@ -107,3 +107,6 @@
 .hide {
     display: none;
 }
+.loginTitle {
+    font-weight: bold;
+}

@@ -59,7 +59,7 @@ const LoginComponent = ({userName,setUserName,setUserid}) => {
         <div className="loginCover">
             <form action="" method="post">
                 <div className="loginPage">
-                    <h1>Firestone Project</h1>
+                    <h1 className="loginTitle">Book-A-Movie</h1>
                     <input className="loginInput" id="username" type="text" placeholder="username" />
                     <input className="loginInput" id ="password" type="password" placeholder="password" />
 
