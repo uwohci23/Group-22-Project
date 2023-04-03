@@ -7,11 +7,15 @@ import Axios from "axios";
 import OperationFailedComponent from "../OperationFailedComponent/OperationFailedComponent";
 import OperationSuccessfulComponent from "../OperationSuccessfulComponent/OperationSuccessfulComponent";
 import StaffDropDownComponent from "../StaffDropDownComponent/StaffDropDownComponent";
+import StaffModal from "../../StaffModal/StaffModal";
+import FormInput from "../FormInput/FormInput";
 
 // MAIN COMPONENT, LOGIN PAGE MAIN
 const StaffPage = () => {
     const [requestError, setRequestError] = React.useState(false);
     const [requestGood, setRequestGood] = React.useState(false);
+    const [showModal, setShowModal] = React.useState(false);
+    const [cardData, setCardData] = React.useState({});
 
     const handleMoviePost = (data) => {
         // set up new movie request
@@ -84,7 +88,11 @@ const StaffPage = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.target);
-        handleMoviePost(Object.fromEntries(data.entries()));
+        // handleMoviePost(Object.fromEntries(data.entries()));
+
+        // modal logic
+        setCardData(Object.fromEntries(data.entries()));
+        setShowModal(!showModal);
     }
 
     // handle value change
@@ -95,6 +103,7 @@ const StaffPage = () => {
     return (
         <div className="staffMain">
             <NavBar />
+            <StaffModal cardData={cardData} showModal={showModal} setShowModal={setShowModal}/>
             <div className="mainComponentsCover">
                 <StaffDropDownComponent className="dropDownMoviesMenu"/>
                 <div className="staffCover">
@@ -108,6 +117,14 @@ const StaffPage = () => {
                                 onChange={onChange}
                             /> 
                         })}
+                        {/* {inputs.map((input) => {
+                        return <FormInput
+                                key = {input.id}
+                                {...input}
+                                value={values[input.name]} 
+                                onChange={onChange}
+                            /> 
+                        })} */}
                         <button className="movieSubmitButton">Submit</button>
                         {requestError ? <OperationFailedComponent error={"Failed to post movie"} /> : null}
                         {requestGood ? <OperationSuccessfulComponent message={"Movie successfully Created"} /> : null}
