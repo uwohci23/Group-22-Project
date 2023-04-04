@@ -25,8 +25,7 @@ const modal = {
     }
 }
 
-const StaffModal = ({cardData, showModal, setShowModal, setLoadingStatus, setRequestStatus, showLoading }) => {
-    const [success, setSuccess] = React.useState(false);
+const StaffModal = ({cardData, showModal, setShowModal, setLoadingStatus, setQueryCompleted, showLoading, setSuccess, setMessage }) => {
 
     const handleMoviePost = async (data) => {
         const request = {
@@ -38,25 +37,33 @@ const StaffModal = ({cardData, showModal, setShowModal, setLoadingStatus, setReq
         const result = await Axios.post("http://127.0.0.1:5000/movie/add", request).then(
             (response) => {
                 if (response.data.status) {
+                    // set status here
                     setSuccess(true);
+                    setMessage("Posting Successful! You can close this window.");
+                } else {
+                    setSuccess(false);
+                    setMessage("Posting failed! duplicate movie name");
                 }
             }
-        ).catch((error) => {console.log(false);});
+        ).catch((error) => {
+            setSuccess(false);
+            setMessage("Posting failed! interval server error");
+        });
     }
-    // React.useEffect(() => {
-    //     const timer = setTimeout(() => {
-    //         console.log("this will run after 1 second!");
-    //     }, 1000);
-    //     return () => clearTimeout(timer);
-    // })
+
     const handlePostLogic = (data) => {
         // handleMoviePost(data);
         console.log("post movie :)");
         const logTest = () => {
-            console.log("HELOOOOOOO");
+            setShowModal(false);
+            setQueryCompleted(true);
         }
         setLoadingStatus(true);
-        setTimeout(logTest, 2000);
+        setSuccess(true);
+        setMessage("Posting Successful! You can close this window.");
+
+        // handleMoviePost(data);
+        setTimeout(logTest, 3000);
     }
 
 
@@ -85,7 +92,7 @@ const StaffModal = ({cardData, showModal, setShowModal, setLoadingStatus, setReq
                                 <button className="modalButtonCancel" onClick={() => {setShowModal(!showModal)}}>Cancel</button>
                             </motion.div>
                             <Link to="/admin"></Link>
-                            {success ? <OperationSuccessfulComponent  className="successMsg" message={"Movie was posted successfully"}/> : null}
+                            {/* {success ? <OperationSuccessfulComponent  className="successMsg" message={"Movie was posted successfully"}/> : null} */}
                         </motion.div>
                     </motion.div>
                 )

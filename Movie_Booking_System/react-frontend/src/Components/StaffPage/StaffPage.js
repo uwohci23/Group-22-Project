@@ -13,12 +13,13 @@ import RequestModal from "../RequestModal/RequestModal";
 
 // MAIN COMPONENT, LOGIN PAGE MAIN
 const StaffPage = () => {
-    const [requestError, setRequestError] = React.useState(false);
-    const [requestGood, setRequestGood] = React.useState(false);
     const [showModal, setShowModal] = React.useState(false);
     const [cardData, setCardData] = React.useState({});
+
     const [showLoading, setLoadingStatus] = React.useState(false);
-    const [requestStatus, setRequestStatus] = React.useState("");
+    const [queryCompleted, setQueryCompleted] = React.useState(false);
+    const [success, setSuccess] = React.useState(false);
+    const [message, setMessage] = React.useState(""); 
 
     // define values for form
     const [values, setValues] = React.useState({
@@ -87,8 +88,8 @@ const StaffPage = () => {
     return (
         <div className="staffMain">
             <NavBar />
-            {/* <RequestModal showLoading={showLoading} setLoadingStatus={setLoadingStatus} requestStatus={requestStatus} setRequestStatus={setRequestStatus}/> */}
-            <StaffModal cardData={cardData} showModal={showModal} setShowModal={setShowModal} setLoadingStatus={setLoadingStatus} setRequestStatus={setRequestStatus} showLoading={showLoading}/>
+            <RequestModal queryCompleted={queryCompleted} setQueryCompleted={setQueryCompleted} message={message} success={success}/>
+            <StaffModal cardData={cardData} showModal={showModal} setShowModal={setShowModal} setLoadingStatus={setLoadingStatus} setQueryCompleted={setQueryCompleted} showLoading={showLoading} setSuccess={setSuccess} setMessage={setMessage}/>
             <div className="mainComponentsCover">
                 <StaffDropDownComponent className="dropDownMoviesMenu"/>
                 <div className="staffCover">
@@ -111,8 +112,6 @@ const StaffPage = () => {
                             /> 
                         })} */}
                         <button className="movieSubmitButton">Submit</button>
-                        {requestError ? <OperationFailedComponent error={"Failed to post movie"} /> : null}
-                        {requestGood ? <OperationSuccessfulComponent message={"Movie successfully Created"} /> : null}
                     </form>
                     
                     <div className="moviePreview">

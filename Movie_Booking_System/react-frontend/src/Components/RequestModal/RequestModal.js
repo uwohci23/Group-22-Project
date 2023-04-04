@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from "framer-motion";
 import MovieCardComponent from "../MovieCardComponent/MovieCardComponent";
 import OperationSuccessfulComponent from '../OperationSuccessfulComponent/OperationSuccessfulComponent';
+import greenCheckmark from "../../assets/checkmark-green.png";
 
 
 const backdrop = {
@@ -24,17 +25,12 @@ const modal = {
     }
 }
 
-const RequestModal = ({showLoading, setLoadingStatus, requestStatus, setRequestStatus }) => {
-    const [success, setSuccess] = React.useState(false);
+const RequestModal = ({queryCompleted, setQueryCompleted, message, success }) => {
 
-    const handlePostLogic = (data) => {
-        // handleMoviePost(data);
-        console.log("post movie :)");
-    }
     return (
         <AnimatePresence mode="wait">
             {
-                showLoading && (
+                queryCompleted && (
                     <motion.div className="backdrop"
                         variants={backdrop}
                         animate="visible"
@@ -44,14 +40,28 @@ const RequestModal = ({showLoading, setLoadingStatus, requestStatus, setRequestS
                             variants={modal}
                             // no need for inittial or animate, defined in parent
                         >
-                            <button className="modalButtonClose" onClick={() => {setLoadingStatus(!showLoading)}}>Close</button>
-                            <motion.h1 className="modalTitle">Review Final Posting</motion.h1>
-                            {/* <p>Testing out</p> */}
+                            <button className="modalButtonClose" onClick={() => {setQueryCompleted(!queryCompleted)}}>Close</button>
+                            <motion.h1 className="modalTitle">Final Posting</motion.h1>
+                            {success ? 
+                                <div className="successBlock">
+                                    <div className="imageWrapper">
+                                        <motion.img src={greenCheckmark} alt="" />
+                                    </div>
+                                    <motion.p className="successText">{message}</motion.p>
+                                </div>
+                            :
+                                <div className="successBlock">
+                                    <div className="imageWrapper">
+                                        <motion.img src={greenCheckmark} alt="" />
+                                    </div>
+                                    <motion.p>supposed to be error</motion.p>
+                                </div>                            
+                            
+                            }
                             <motion.div className="buttonWrapper">
-                                <button className="modalButtonCancel" onClick={() => {setLoadingStatus(!showLoading)}}>Cancel</button>
+                                <button className="modalButtonCancel" onClick={() => {setQueryCompleted(!queryCompleted)}}>Close</button>
                             </motion.div>
                             <Link to="/admin"></Link>
-                            {success ? <OperationSuccessfulComponent  className="successMsg" message={"Movie was posted successfully"}/> : null}
                         </motion.div>
                     </motion.div>
                 )
