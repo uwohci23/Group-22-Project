@@ -25,7 +25,7 @@ const modal = {
 }
 
 const StaffModal = ({cardData, showModal, setShowModal, setLoadingStatus, setQueryCompleted, showLoading, setSuccess, setMessage }) => {
-
+    const [stillCall, setStillCall] = React.useState(false);
     const handleMoviePost = async (data) => {
         const request = {
             title: data.title,
@@ -50,18 +50,30 @@ const StaffModal = ({cardData, showModal, setShowModal, setLoadingStatus, setQue
         });
     }
 
+
+
+
     // will handle showing new modal and everything related to this
     const handlePostLogic = (data) => {
         // handleMoviePost(data);
         console.log("post movie :)");
         const logTest = () => {
-            setShowModal(false);
-            setLoadingStatus(false);
-            setQueryCompleted(true);
+            if (stillCall) {
+                handleMoviePost(data);
+                setShowModal(false);
+                setLoadingStatus(false);
+                setQueryCompleted(true);
+            }
         }
         setLoadingStatus(true);
-        handleMoviePost(data);
+        setStillCall(true);
         setTimeout(logTest, 3000);
+    }
+
+    const handleCancellation = () => {
+        setStillCall(false);
+        setLoadingStatus(false);
+        setShowModal(!showModal);
     }
 
 
@@ -87,7 +99,7 @@ const StaffModal = ({cardData, showModal, setShowModal, setLoadingStatus, setQue
                             </motion.div>
                             <motion.div className="buttonWrapper">
                                 <button className="modalButtonSubmit" onClick={() => {handlePostLogic(cardData)}}>Submit</button>
-                                <button className="modalButtonCancel" onClick={() => {setShowModal(!showModal)}}>Cancel</button>
+                                <button className="modalButtonCancel" onClick={() => {handleCancellation()}}>Cancel</button>
                             </motion.div>
                             <Link to="/admin"></Link>
                             {/* {success ? <OperationSuccessfulComponent  className="successMsg" message={"Movie was posted successfully"}/> : null} */}
