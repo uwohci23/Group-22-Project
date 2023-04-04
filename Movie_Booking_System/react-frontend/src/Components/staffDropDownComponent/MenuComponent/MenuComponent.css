@@ -48,5 +48,6 @@
 }
 
 .searchBarStaff {
-    margin-right: 10px;
+    margin-left: 5px;
+    border-radius: 5px;
 }

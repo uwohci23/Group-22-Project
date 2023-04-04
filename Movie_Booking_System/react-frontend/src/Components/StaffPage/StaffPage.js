@@ -7,7 +7,7 @@ import Axios from "axios";
 import OperationFailedComponent from "../OperationFailedComponent/OperationFailedComponent";
 import OperationSuccessfulComponent from "../OperationSuccessfulComponent/OperationSuccessfulComponent";
 import StaffDropDownComponent from "../StaffDropDownComponent/StaffDropDownComponent";
-import StaffModal from "../../StaffModal/StaffModal";
+import StaffModal from "../StaffModal/StaffModal";
 import FormInput from "../FormInput/FormInput";
 
 // MAIN COMPONENT, LOGIN PAGE MAIN
