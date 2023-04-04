@@ -4,7 +4,6 @@ import Axios from "axios";
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from "framer-motion";
 import MovieCardComponent from "../MovieCardComponent/MovieCardComponent";
-import OperationSuccessfulComponent from '../OperationSuccessfulComponent/OperationSuccessfulComponent';
 import spinLoading from "../../assets/spinning-loading.svg";
 
 
@@ -51,18 +50,17 @@ const StaffModal = ({cardData, showModal, setShowModal, setLoadingStatus, setQue
         });
     }
 
+    // will handle showing new modal and everything related to this
     const handlePostLogic = (data) => {
         // handleMoviePost(data);
         console.log("post movie :)");
         const logTest = () => {
             setShowModal(false);
+            setLoadingStatus(false);
             setQueryCompleted(true);
         }
         setLoadingStatus(true);
-        setSuccess(true);
-        setMessage("Posting Successful! You can close this window.");
-
-        // handleMoviePost(data);
+        handleMoviePost(data);
         setTimeout(logTest, 3000);
     }
 

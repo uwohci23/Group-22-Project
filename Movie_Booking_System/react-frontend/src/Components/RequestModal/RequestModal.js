@@ -1,11 +1,9 @@
 import React from "react";
 import "./RequestModal.css";
-import Axios from "axios";
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from "framer-motion";
-import MovieCardComponent from "../MovieCardComponent/MovieCardComponent";
-import OperationSuccessfulComponent from '../OperationSuccessfulComponent/OperationSuccessfulComponent';
 import greenCheckmark from "../../assets/checkmark-green.png";
+import errorIcon from "../../assets/error-icon.png";
 
 
 const backdrop = {
@@ -40,7 +38,7 @@ const RequestModal = ({queryCompleted, setQueryCompleted, message, success }) =>
                             variants={modal}
                             // no need for inittial or animate, defined in parent
                         >
-                            <button className="modalButtonClose" onClick={() => {setQueryCompleted(!queryCompleted)}}>Close</button>
+                            <button className="requestButtonClose" onClick={() => {setQueryCompleted(!queryCompleted)}}>Close</button>
                             <motion.h1 className="modalTitle">Final Posting</motion.h1>
                             {success ? 
                                 <div className="successBlock">
@@ -50,16 +48,16 @@ const RequestModal = ({queryCompleted, setQueryCompleted, message, success }) =>
                                     <motion.p className="successText">{message}</motion.p>
                                 </div>
                             :
-                                <div className="successBlock">
+                                <div className="failBlock">
                                     <div className="imageWrapper">
-                                        <motion.img src={greenCheckmark} alt="" />
+                                        <motion.img src={errorIcon} alt="" />
                                     </div>
-                                    <motion.p>supposed to be error</motion.p>
+                                    <motion.p className="failText">{message}</motion.p>
                                 </div>                            
                             
                             }
                             <motion.div className="buttonWrapper">
-                                <button className="modalButtonCancel" onClick={() => {setQueryCompleted(!queryCompleted)}}>Close</button>
+                                <button className="requestButtonCancel" onClick={() => {setQueryCompleted(!queryCompleted)}}>Close</button>
                             </motion.div>
                             <Link to="/admin"></Link>
                         </motion.div>
