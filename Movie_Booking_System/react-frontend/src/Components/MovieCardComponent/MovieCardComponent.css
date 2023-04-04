@@ -33,6 +33,10 @@
     margin-bottom: 0.5rem;
     white-space: nowrap;
 }
+.cardTitle h3 {
+    font-weight: bold;
+    font-size: 1.2em;
+}
 
 h3 {
     margin: 0;

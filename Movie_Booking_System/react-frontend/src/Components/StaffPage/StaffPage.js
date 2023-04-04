@@ -7,30 +7,19 @@ import Axios from "axios";
 import OperationFailedComponent from "../OperationFailedComponent/OperationFailedComponent";
 import OperationSuccessfulComponent from "../OperationSuccessfulComponent/OperationSuccessfulComponent";
 import StaffDropDownComponent from "../StaffDropDownComponent/StaffDropDownComponent";
+import StaffModal from "../StaffModal/StaffModal";
+import RequestModal from "../RequestModal/RequestModal";
+// import FormInput from "../FormInput/FormInput";
 
 // MAIN COMPONENT, LOGIN PAGE MAIN
 const StaffPage = () => {
-    const [requestError, setRequestError] = React.useState(false);
-    const [requestGood, setRequestGood] = React.useState(false);
+    const [showModal, setShowModal] = React.useState(false);
+    const [cardData, setCardData] = React.useState({});
 
-    const handleMoviePost = (data) => {
-        // set up new movie request
-        const request = {
-            title: data.title,
-            image_url: data.imageUrl,
-            release_date: data.releaseDate,
-            age_rating: data.ageRating,
-        };
-
-        // make Axios Request
-        const result = Axios.post("http://127.0.0.1:5000/movie/add", request).then(
-            (response) => {
-                if (response.data.status) {
-                    setRequestGood(true);
-                }
-            }
-        ).catch((error) => {setRequestError(true);});
-    }
+    const [showLoading, setLoadingStatus] = React.useState(false);
+    const [queryCompleted, setQueryCompleted] = React.useState(false);
+    const [success, setSuccess] = React.useState(false);
+    const [message, setMessage] = React.useState(""); 
 
     // define values for form
     const [values, setValues] = React.useState({
@@ -48,7 +37,7 @@ const StaffPage = () => {
             placeholder: "Movie Title",
             label: "Movie Title",
             errorMessage: "Movie Title should be at least 1 chars long",
-            pattern: "[a-zA-Z0-9 ]+",
+            pattern: "[a-zA-Z0-9 -]+",
             required: true,
         },
         {
@@ -84,7 +73,11 @@ const StaffPage = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.target);
-        handleMoviePost(Object.fromEntries(data.entries()));
+        // handleMoviePost(Object.fromEntries(data.entries()));
+
+        // modal logic
+        setCardData(Object.fromEntries(data.entries()));
+        setShowModal(!showModal);
     }
 
     // handle value change
@@ -95,6 +88,8 @@ const StaffPage = () => {
     return (
         <div className="staffMain">
             <NavBar />
+            <RequestModal queryCompleted={queryCompleted} setQueryCompleted={setQueryCompleted} message={message} success={success}/>
+            <StaffModal cardData={cardData} showModal={showModal} setShowModal={setShowModal} setLoadingStatus={setLoadingStatus} setQueryCompleted={setQueryCompleted} showLoading={showLoading} setSuccess={setSuccess} setMessage={setMessage}/>
             <div className="mainComponentsCover">
                 <StaffDropDownComponent className="dropDownMoviesMenu"/>
                 <div className="staffCover">
@@ -108,9 +103,15 @@ const StaffPage = () => {
                                 onChange={onChange}
                             /> 
                         })}
+                        {/* {inputs.map((input) => {
+                        return <FormInput
+                                key = {input.id}
+                                {...input}
+                                value={values[input.name]} 
+                                onChange={onChange}
+                            /> 
+                        })} */}
                         <button className="movieSubmitButton">Submit</button>
-                        {requestError ? <OperationFailedComponent error={"Failed to post movie"} /> : null}
-                        {requestGood ? <OperationSuccessfulComponent message={"Movie successfully Created"} /> : null}
                     </form>
                     
                     <div className="moviePreview">

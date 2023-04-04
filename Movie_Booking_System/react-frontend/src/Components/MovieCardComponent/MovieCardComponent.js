@@ -3,6 +3,7 @@ import "./MovieCardComponent.css";
 import {  BsBookmarkPlus } from 'react-icons/bs'
 import {  FaBookmark } from 'react-icons/fa'
 import Axios from 'axios';
+import { motion } from "framer-motion";
 
 // Props to Pass:
 //     - imageUrl: url of the imageUrl
@@ -88,24 +89,24 @@ const MovieCardComponent = (props) => {
     //     console.log(props.id,props.bookmark)
     // }, [isBookmarked]);
     return (
-        <div className="cardContainer" key={props.id}>
-            <div className="imageContainer">
-                <img src={props.imageUrl} alt="Image Unavailable" />
-            </div>
-            <div className="cardContent">
-                <div className="cardTitle">
-                    <h3>{props.title}</h3>
-                </div>
-                <div className="cardReleaseDate">
-                    <p>{props.releaseDate}</p>
-                </div>
-                <div className="cardButton">
-                    <button onClick= {() => {handleClick(true);}}>
+        <motion.div className="cardContainer" key={props.id}>
+            <motion.div className="imageContainer">
+                <motion.img src={props.imageUrl} alt="Image Unavailable" />
+            </motion.div>
+            <motion.div className="cardContent">
+                <motion.div className="cardTitle">
+                    <motion.h3>{props.title}</motion.h3>
+                </motion.div>
+                <motion.div className="cardReleaseDate">
+                    <motion.p>{props.releaseDate}</motion.p>
+                </motion.div>
+                <motion.div className="cardButton">
+                    <motion.button onClick= {() => {handleClick(true);}}>
                         See Sessions
-                    </button>
-                </div>
-                <div className="bookmarkButton" onClick={handleButtonClick}>
-                    <a
+                    </motion.button>
+                </motion.div>
+                <motion.div className="bookmarkButton" onClick={handleButtonClick}>
+                    <motion.a
                         style={{
                             transition: "background-color 0.3s ease-in-out",
                             cursor: "pointer"
@@ -113,10 +114,10 @@ const MovieCardComponent = (props) => {
                         >
              {isBookmarked ? <FaBookmark /> : <BsBookmarkPlus/>}
 
-                    </a>
-                </div>
-            </div>
-        </div>
+                    </motion.a>
+                </motion.div>
+            </motion.div>
+        </motion.div>
         
     )
 }
