@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from "framer-motion";
 import MovieCardComponent from "../MovieCardComponent/MovieCardComponent";
 import OperationSuccessfulComponent from '../OperationSuccessfulComponent/OperationSuccessfulComponent';
+import spinLoading from "../../assets/spinning-loading.svg";
 
 
 const backdrop = {
@@ -24,17 +25,17 @@ const modal = {
     }
 }
 
-const StaffModal = ({cardData, showModal, setShowModal }) => {
+const StaffModal = ({cardData, showModal, setShowModal, setLoadingStatus, setRequestStatus, showLoading }) => {
     const [success, setSuccess] = React.useState(false);
 
-    const handleMoviePost = (data) => {
+    const handleMoviePost = async (data) => {
         const request = {
             title: data.title,
             image_url: data.imageUrl,
             release_date: data.releaseDate,
             age_rating: data.ageRating,
         };
-        const result = Axios.post("http://127.0.0.1:5000/movie/add", request).then(
+        const result = await Axios.post("http://127.0.0.1:5000/movie/add", request).then(
             (response) => {
                 if (response.data.status) {
                     setSuccess(true);
@@ -42,7 +43,21 @@ const StaffModal = ({cardData, showModal, setShowModal }) => {
             }
         ).catch((error) => {console.log(false);});
     }
-
+    // React.useEffect(() => {
+    //     const timer = setTimeout(() => {
+    //         console.log("this will run after 1 second!");
+    //     }, 1000);
+    //     return () => clearTimeout(timer);
+    // })
+    const handlePostLogic = (data) => {
+        // handleMoviePost(data);
+        console.log("post movie :)");
+        const logTest = () => {
+            console.log("HELOOOOOOO");
+        }
+        setLoadingStatus(true);
+        setTimeout(logTest, 2000);
+    }
 
 
     return (
@@ -62,9 +77,11 @@ const StaffModal = ({cardData, showModal, setShowModal }) => {
                             <motion.h1 className="modalTitle">Review Final Posting</motion.h1>
                             <MovieCardComponent key={6789998212} id={6789998212} className="movieChild" title={cardData.title} imageUrl={cardData.imageUrl}
                                 releaseDate={cardData.releaseDate} bookmark={true} />
-                            {/* <p>Testing out</p> */}
+                            <motion.div className="svgWrapper">
+                                {showLoading ? <motion.img src={spinLoading} alt="nothing here" /> : null}
+                            </motion.div>
                             <motion.div className="buttonWrapper">
-                                <button className="modalButtonSubmit" onClick={() => {handleMoviePost(cardData)}}>Submit</button>
+                                <button className="modalButtonSubmit" onClick={() => {handlePostLogic(cardData)}}>Submit</button>
                                 <button className="modalButtonCancel" onClick={() => {setShowModal(!showModal)}}>Cancel</button>
                             </motion.div>
                             <Link to="/admin"></Link>

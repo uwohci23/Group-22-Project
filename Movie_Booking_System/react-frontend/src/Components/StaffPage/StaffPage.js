@@ -8,7 +8,8 @@ import OperationFailedComponent from "../OperationFailedComponent/OperationFaile
 import OperationSuccessfulComponent from "../OperationSuccessfulComponent/OperationSuccessfulComponent";
 import StaffDropDownComponent from "../StaffDropDownComponent/StaffDropDownComponent";
 import StaffModal from "../StaffModal/StaffModal";
-import FormInput from "../FormInput/FormInput";
+import RequestModal from "../RequestModal/RequestModal";
+// import FormInput from "../FormInput/FormInput";
 
 // MAIN COMPONENT, LOGIN PAGE MAIN
 const StaffPage = () => {
@@ -16,25 +17,8 @@ const StaffPage = () => {
     const [requestGood, setRequestGood] = React.useState(false);
     const [showModal, setShowModal] = React.useState(false);
     const [cardData, setCardData] = React.useState({});
-
-    const handleMoviePost = (data) => {
-        // set up new movie request
-        const request = {
-            title: data.title,
-            image_url: data.imageUrl,
-            release_date: data.releaseDate,
-            age_rating: data.ageRating,
-        };
-
-        // make Axios Request
-        const result = Axios.post("http://127.0.0.1:5000/movie/add", request).then(
-            (response) => {
-                if (response.data.status) {
-                    setRequestGood(true);
-                }
-            }
-        ).catch((error) => {setRequestError(true);});
-    }
+    const [showLoading, setLoadingStatus] = React.useState(false);
+    const [requestStatus, setRequestStatus] = React.useState("");
 
     // define values for form
     const [values, setValues] = React.useState({
@@ -103,7 +87,8 @@ const StaffPage = () => {
     return (
         <div className="staffMain">
             <NavBar />
-            <StaffModal cardData={cardData} showModal={showModal} setShowModal={setShowModal}/>
+            {/* <RequestModal showLoading={showLoading} setLoadingStatus={setLoadingStatus} requestStatus={requestStatus} setRequestStatus={setRequestStatus}/> */}
+            <StaffModal cardData={cardData} showModal={showModal} setShowModal={setShowModal} setLoadingStatus={setLoadingStatus} setRequestStatus={setRequestStatus} showLoading={showLoading}/>
             <div className="mainComponentsCover">
                 <StaffDropDownComponent className="dropDownMoviesMenu"/>
                 <div className="staffCover">
