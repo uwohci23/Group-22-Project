@@ -16,7 +16,7 @@ const BookmarkedMoviesPage = ({navBarUserid}) => {
     const handleList = () => {
         setShowMoviesButton(false);
         console.log("userid is ",navBarUserid)
-        const result = Axios.get(`http://127.0.0.1:5000/user/1/bookmarklist`).then(
+        const result = Axios.get(`http://127.0.0.1:5000/user/${navBarUserid}/bookmarklist`).then(
             (response) => {
 
                 if (response.status < 400) {
@@ -32,6 +32,9 @@ const BookmarkedMoviesPage = ({navBarUserid}) => {
              }
         )
     }
+    React.useEffect(() => {
+        handleList()
+    },[]);
     React.useEffect(() => {
         // console.log("ml", movieList);
       }, [movieList]);
@@ -53,11 +56,11 @@ const BookmarkedMoviesPage = ({navBarUserid}) => {
     return(
         <div className="mainCover">
             <NavBar/>
-            {showMoviesbutton ?
+            {/* {showMoviesbutton ?
             <div className="buttonWrapper">
                 <button className="showMoviesButton" onClick={handleList}>SEE LIST OF HIGHLIGHTED MOVIES</button>
             </div>
-            : null}
+            : null} */}
             <div className="movieGrid">
                 {movieList ? movieList.map((movie) => {
                     return <MovieCardComponent key={movie.movie_id} id={movie.movie_id} className="movieChild" title={movie.title} imageUrl={movie.image_url}

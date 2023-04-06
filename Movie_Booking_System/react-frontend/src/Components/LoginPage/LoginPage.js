@@ -49,6 +49,7 @@ const LoginComponent = ({userName,setUserName,setUserid}) => {
                         
                         // if successful, populate local storage with user name
                         window.localStorage.setItem("MAIN_USERNAME", JSON.stringify(username));
+                        console.log("in login component",response.data.userid)
                         setUserid(response.data.userid)
                         navigate("/main");
                     }

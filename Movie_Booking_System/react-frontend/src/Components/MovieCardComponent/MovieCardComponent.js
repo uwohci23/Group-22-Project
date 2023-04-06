@@ -51,7 +51,7 @@ const MovieCardComponent = (props) => {
         const user_id = props.userid
         const request = {user_id:user_id,movie_id:movie_id}
         let url = ""
-        if (isBookmarked == false){
+        if (isBookmarked === false){
             console.log("we are going to ADD", isBookmarked)
             const result = Axios.post('http://127.0.0.1:5000/user/bookmark/add',request).then(
                 (response) => {

@@ -12,7 +12,6 @@ const MainPage = (props) => {
     const [displayModal, setDisplayModal] = React.useState(null);
     const [searchQuery, setSearchQuery] = React.useState('');
     const [bookmarkList,setBookmarkList] = React.useState('');
-    
     const handleList =  async () => {
         setShowMoviesButton(false);
         const response1 = await  Axios.get("http://127.0.0.1:5000/movie/list");
@@ -21,7 +20,8 @@ const MainPage = (props) => {
             setMovieList(response1.data);
 
         }
-        
+         // add useEffect to run handleList on page load
+      
 
         const response2 = await Axios.get(`http://127.0.0.1:5000/user/${props.navBarUserid}/bookmarklist`);
         if (response2.status < 400) {
@@ -44,9 +44,12 @@ const MainPage = (props) => {
     }
     }
     React.useEffect(() => {
-
-      }, [movieList,bookmarkList]);
-
+        handleList()
+    },[]);
+    
+    React.useEffect(() => {
+        console.log("on page load",props.navBarUserid)
+    }, [movieList,bookmarkList]);
     const handleSearchQuery = (query) => {
         setSearchQuery(query);
         if(query !== ''){
@@ -68,11 +71,11 @@ const MainPage = (props) => {
 
         <div className="mainCover">
             <NavBar setSearchQuery={handleSearchQuery} />
-            {showMoviesbutton ?
+            {/* {showMoviesbutton ?
             <div className="buttonWrapper">
                 <button className="showMoviesButton" onClick={handleList}>SEE LIST OF MOVIES</button>
             </div>
-            : null}
+            : null} */}
             <div className="movieGrid">
                 {movieList ? movieList.map((movie) => {
                     return <MovieCardComponent key={movie.movie_id} id={movie.movie_id} className="movieChild" title={movie.title} imageUrl={movie.image_url}
