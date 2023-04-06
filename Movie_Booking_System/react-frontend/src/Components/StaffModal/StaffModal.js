@@ -36,7 +36,7 @@ const StaffModal = ({cardData, showModal, setShowModal, setLoadingStatus, setQue
         };
         const result = await Axios.post("http://127.0.0.1:5000/movie/add", request).then(
             (response) => {
-                if (response.data.status) {
+                if (response.data.status < 300) {
                     // set status here
                     setSuccess(true);
                     setMessage("Posting Successful! You can close this window.");
@@ -47,7 +47,7 @@ const StaffModal = ({cardData, showModal, setShowModal, setLoadingStatus, setQue
             }
         ).catch((error) => {
             setSuccess(false);
-            setMessage("Posting failed! interval server error");
+            setMessage("Posting failed! Check to see if movie is duplicate");
         });
     }
 
