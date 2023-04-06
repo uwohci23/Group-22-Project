@@ -30,14 +30,14 @@ function DesignPrinciples() {
             The login page also uses the consistency design pattern because it has the same style and appearance as the internal elements within the system. For example the blue buttons,black border,and white background.
             `,
             title: "Principle 4 - Login (Consistency)",
-            image: process.env.PUBLIC_URL + "/login-6.jpg"
+            image: process.env.PUBLIC_URL + "/login-5.jpg"
         },
         {
             message: `
             Another design pattern that was used for the login page is visual representation. This design pattern was used by making the user and password input boxes right on top of eachother which tells the user that these two fields are meant to be written together.
             `,
             title: "Principle 5 (Representation)",
-            image: process.env.PUBLIC_URL + "/login-5.jpg"
+            image: process.env.PUBLIC_URL + "/login-6.png"
         },
         {
             message: `
@@ -118,42 +118,30 @@ function DesignPrinciples() {
         },
         {
             message: `
-            22222222222222222222
-            oooooooooooooooooooo
-            oooooooooooooooooooo
-            oooooooooooooooooooo
-            oooooooooooooooooooo
-            oooooooooooooooooooo
-            22222222222222222222
+            The Constraint design pattern was utilized in the Staff page as a way to make sure the input given by the user 
+            in the staff page follows the pattern of the movie cards in the main page. With this, we can make sure that all 
+            invalid inputs are filtered through before any movie is published
             `,
-            title: "Principle 13",
-            image: process.env.PUBLIC_URL + "/login-1.jpg"
+            title: "Principle 13 - Staff Page (Constraint)",
+            image: process.env.PUBLIC_URL + "/Gabriel-1.png"
         },
         {
             message: `
-            22222222222222222222
-            oooooooooooooooooooo
-            oooooooooooooooooooo
-            oooooooooooooooooooo
-            oooooooooooooooooooo
-            oooooooooooooooooooo
-            22222222222222222222
+            In the staff page, whenever a staff member submits a movie, a “loading” icon is utilized as a way to signify to the 
+            user that their request is being processed. This is a transfer of knowledge from other apps, 
+            as a multitude of other artifacts on the internet utilize the same (or extremely similar) icon to display “loadings”
             `,
-            title: "Principle 14",
-            image: process.env.PUBLIC_URL + "/login-1.jpg"
+            title: "Principle 14 - Staff Page (Transfer)",
+            image: process.env.PUBLIC_URL + "/Gabriel-2.png"
         },
         {
             message: `
-            22222222222222222222
-            oooooooooooooooooooo
-            oooooooooooooooooooo
-            oooooooooooooooooooo
-            oooooooooooooooooooo
-            oooooooooooooooooooo
-            22222222222222222222
+            In order to minimize the time taken by the user to move their mouse to the main component of the page 
+            (the form to input movie information), the form was placed in the centre of the screen, while also 
+            having a considerable size when compared to other elements on the screen
             `,
-            title: "Principle 15",
-            image: process.env.PUBLIC_URL + "/login-1.jpg"
+            title: "Principle 15 - Staff Page (Fitt's Law)",
+            image: process.env.PUBLIC_URL + "/Gabriel-3.png"
         },
         {
             message: `
