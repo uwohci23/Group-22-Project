@@ -1,10 +1,13 @@
 import React from 'react';
+import "./TextBlock.css"
 
-function TextBlock() {
+function TextBlock({message}) {
 
     return (
     <div className="textBlockWrapper">
-        <p>This is the text Block</p>
+        <div className="messageWrapper">
+            <p>{message}</p>
+        </div>
     </div>
     );
 }

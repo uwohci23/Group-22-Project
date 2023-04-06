@@ -5,6 +5,14 @@
     overflow: hidden;
     width: 40em;
     height: 25em;
+    border-radius: 30px;
+    border: 1px solid rgb(61, 43, 226);
+}
+.summaryWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
 }
 
 .execImageWrapper img {
