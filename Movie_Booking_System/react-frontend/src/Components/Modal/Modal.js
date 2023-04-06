@@ -1,10 +1,32 @@
 import React from 'react'
+import { useEffect } from 'react'
 import "./Modal.css"
+import Seat from './Seat'
 import OperationSuccessfulComponent from '../OperationSuccessfulComponent/OperationSuccessfulComponent';
-import Seatmap from 'react-seatmap';
 
 const Modal = (props) => {
+    /*
+    0 - Unselected
+    1 - selected
+    2 - sold
+    */
+    const totalSeatRows = 6;
+    const totalSeatColumns = 8;
     const [success, setSuccess] = React.useState(false);
+    const [totalSeats, setTotalSeats] = React.useState(0);
+    const [seatMap, setSeatMap] = React.useState(Array.from({ length: totalSeatRows }, () => Array(totalSeatColumns).fill(0)));
+
+    useEffect(() => {
+        setSeatMap(seatMap.map((row, rowIndex) => {
+            return row.map((seat, seatIndex) => {
+                if (rowIndex == 1 && seatIndex == 0) {
+                    return 2;
+                }
+                return seat;
+            })
+        }))
+    }, []);
+    
     if (!props) {
         return null;
     } 
@@ -20,6 +42,9 @@ const Modal = (props) => {
     const handleCost = event => {
         document.getElementById("lblName").innerHTML = "Total: $" + (document.getElementById("tickets").selectedIndex + 1)*8.5
     };
+    
+    
+
 
     return (
         <div className ="pop-up">
@@ -47,68 +72,32 @@ const Modal = (props) => {
                         <div className="container2">
                             <div className="screen"></div>
 
+                            {seatMap.map((row, rowIndex) => (
                                 <div className="row">
+                                    {row.map((seat, seatIndex) => (
+                                        seatMap[rowIndex][seatIndex] === 2 ? (
+                                            <div className="seat sold"></div>
+                                        ) : (
+                                            <Seat 
+                                                seatMap={seatMap}
+                                                setSeatMap={setSeatMap}
+                                                row={rowIndex}
+                                                col={seatIndex}
+                                                seats={totalSeats}
+                                                setSeats={setTotalSeats}
+                                            />
+                                        )
+                                    ))}
+                                    {/* <div className="seat"></div>
                                     <div className="seat"></div>
-                                        <div className="seat"></div>
-                                        <div className="seat"></div>
-                                        <div className="seat"></div>
-                                        <div className="seat"></div>
-                                        <div className="seat"></div>
-                                        <div className="seat"></div>
-                                        <div className="seat"></div>
-                                    </div>
-
-                                    <div className="row">
-                                        <div className="seat"></div>
-                                        <div className="seat"></div>
-                                        <div className="seat"></div>
-                                        <div className="seat sold"></div>
-                                        <div className="seat sold"></div>
-                                        <div className="seat"></div>
-                                        <div className="seat"></div>
-                                        <div className="seat"></div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="seat"></div>
-                                        <div className="seat"></div>
-                                        <div className="seat"></div>
-                                        <div className="seat"></div>
-                                        <div className="seat"></div>
-                                        <div className="seat"></div>
-                                        <div className="seat sold"></div>
-                                        <div className="seat sold"></div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="seat"></div>
-                                        <div className="seat"></div>
-                                        <div className="seat"></div>
-                                        <div className="seat"></div>
-                                        <div className="seat"></div>
-                                        <div className="seat"></div>
-                                        <div className="seat"></div>
-                                        <div className="seat"></div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="seat"></div>
-                                        <div className="seat"></div>
-                                        <div className="seat"></div>
-                                        <div className="seat sold"></div>
-                                        <div className="seat sold"></div>
-                                        <div className="seat"></div>
-                                        <div className="seat"></div>
-                                        <div className="seat"></div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="seat"></div>
-                                        <div className="seat"></div>
-                                        <div className="seat"></div>
-                                        <div className="seat"></div>
-                                        <div className="seat sold"></div>
-                                        <div className="seat sold"></div>
-                                        <div className="seat sold"></div>
-                                        <div className="seat"></div>
-                                    </div>
-                                    </div>
+                                    <div className="seat"></div>
+                                    <div className="seat"></div>
+                                    <div className="seat"></div>
+                                    <div className="seat"></div>
+                                    <div className="seat"></div> */}
+                                </div>
+                            ))}
+                        </div>
                     <div className="modal-body4">
                         <label id="lblName">Total: $8.50 </label> 
                     </div>
@@ -131,14 +120,16 @@ const Modal = (props) => {
                         </div>
                     </div>
                     <div>
-                            <input type="radio" value="Combo 1 (Popcorn with pop)" name="gender" /> Combo 1 (Popcorn with pop)
-                            <input type="radio" value="Combo 2 (Popcorn with water)" name="gender" /> Combo 2 (Popcorn with water)
+                            <input type="radio" value="Combo 1 (Popcorn with pop)   " name="gender" /> Combo 1 (Popcorn with pop)        
+                            <input type="radio" value="Combo 2 (Popcorn with water)   " name="gender" /> Combo 2 (Popcorn with water)   
+                            <input type="radio" value="None" name="gender" /> None 
                         </div>
                 </div>
             </div>
             </div>
         </div>
     )
+    
     
 }
 export default Modal
