@@ -14,6 +14,7 @@
     display:flex;
     align-items: center;
     justify-content: center;
+    overflow: auto;
 
 }
 .modal-content{
@@ -26,13 +27,15 @@
 
 
 .modal-header1, .modal-footer{
-    padding:10px
+    padding:10px;
+    z-index:2;
 }
 
 .modal-title{
     display: flex;
     justify-content: center;
     margin: 0;
+    font-weight: bold;
 }
 
 .modal-body{
@@ -105,7 +108,7 @@
     appearance: none;
   }
   
-  .container {
+  .container2 {
     perspective: 1000px;
     margin-bottom: 30px;
     justify-content: center;
@@ -220,7 +223,7 @@ hr {
   border-bottom: 1px solid #eee;
 }
 .combo-footer{
-  padding:10px
+  padding:10px;
 }
 
 .combo-header{
