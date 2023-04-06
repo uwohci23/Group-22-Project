@@ -1,0 +1,19 @@
+.execImageWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    width: 40em;
+    height: 25em;
+}
+
+.execImageWrapper img {
+    flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.textImageWrapper {
+    display: flex;
+    align-items: center;
+}
