@@ -34,8 +34,9 @@ const NavBar = ({setSearchQuery}) => {
                 <ul className="itemsList">
                 <li className="listItem bookmark"  onClick = {() => {handleBookmarkedPage(true)}}> 
                 <FaBookmark /> 
+                List
                 </li>
-
+                
                 <li className="listItem"> 
 
                 <input 

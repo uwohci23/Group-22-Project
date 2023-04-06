@@ -74,6 +74,13 @@
 .loginInput:focus {
     outline-color: rgb(32, 177, 255);
 }
+.loginInput.success {
+    border: 2px solid green;
+  }
+  
+.loginInput.failure {
+    border: 2px solid red;
+  }
 
 .login-btn {
     width: 50%;
@@ -106,4 +113,7 @@
 
 .hide {
     display: none;
+}
+.loginTitle {
+    font-weight: bold;
 }
