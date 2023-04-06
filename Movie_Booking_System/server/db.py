@@ -64,7 +64,61 @@ class Database:
             FOREIGN KEY (movie_id) REFERENCES movie(movie_id)
             )
         ''')
+        self.cursor.execute('''
+            CREATE TABLE IF NOT EXISTS theatre (
+                theatre_id INTEGER PRIMARY KEY,
+                movie_id INTEGER,
+                movie_title TEXT,
+                current_seats INTEGER,
+                FOREIGN KEY (movie_id) REFERENCES movie(movie_id)
+            )
+        ''')
+        self.cursor.execute('''
+            CREATE TABLE IF NOT EXISTS seat (
+                seat_id INTEGER PRIMARY KEY,
+                theatre_id INTEGER,
+                row_number INTEGER,
+                column_number INTEGER,
+                status INTEGER,
+                FOREIGN KEY (theatre_id) REFERENCES theatre(theatre_id)
+            )
+        ''')
         self.connection.commit()
+
+    def add_seats(self, movie_title: str, row_number: int, column_number: int, status: int) -> bool:
+        try:
+            data = self.get_theatre_by_movie_title(movie_title)
+            theatre_id = data['theatre_id']
+            self.cursor.execute('''
+                INSERT INTO seat (theatre_id, row_number, column_number, status)
+                VALUES (?, ?, ?, ?)
+            ''', (theatre_id, row_number, column_number, status))
+            self.connection.commit()
+            return True
+        except sqlite3.Error:
+            return False
+    
+    def get_seats(self, movie_title: str) -> typing.List[dict]:
+        data = self.get_theatre_by_movie_title(movie_title)
+        theatre_id = data['theatre_id']
+        self.cursor.execute('''
+            SELECT * FROM seat WHERE theatre_id = ?
+        ''', (theatre_id,))
+        data = self.cursor.fetchall()
+        return data
+
+    def add_theatre(self, movie_title: str, current_seats: int) -> bool:
+        try:
+            data = self.get_movie_by_title(movie_title)
+            movie_id = data['movie_id']
+            self.cursor.execute('''
+                INSERT INTO theatre (movie_id, movie_title, current_seats)
+                VALUES (?, ?, ?)
+            ''', (movie_id, movie_title, current_seats))
+            self.connection.commit()
+            return True
+        except sqlite3.Error:
+            return False
 
     def add_movie(self, title: str, image_url: str, release_date: str, age_rating: str) -> bool:
         try:
@@ -89,6 +143,47 @@ class Database:
         except sqlite3.Error:
             return False
     
+    def get_theatre(self, theatre_id: int) -> typing.List[dict]:
+        self.cursor.execute('''
+            SELECT * FROM theatre WHERE theatre_id = ?
+        ''', (theatre_id,))
+        data = self.cursor.fetchall()
+        if data is None:
+            return None
+        return {
+            'theatre_id': data[0],
+            'movie_id': data[1],
+            'movie_title': data[2],
+            'current_seats': data[3]
+        }
+
+    def get_theatre_by_movie_title(self, movie_title: str) -> typing.Optional[dict]:
+        self.cursor.execute('''
+            SELECT * FROM theatre WHERE movie_title = ?
+        ''', (movie_title,))
+        data = self.cursor.fetchone()
+        if data is None:
+            return None
+        return {
+            'theatre_id': data[0],
+            'movie_id': data[1],
+            'movie_title': data[2],
+            'current_seats': data[3]
+        }
+    def get_movie_by_title(self, movie_title: str) -> typing.Optional[dict]:
+        self.cursor.execute('''
+            SELECT * FROM movie WHERE movie_title = ?
+        ''', (movie_title,))
+        data = self.cursor.fetchone()
+        if data is None:
+            return None
+        return {
+            'movie_id': data[0],
+            'movie_title': data[1],
+            'image_url': data[2],
+            'release_date': data[3],
+            'age_rating': data[4],
+        }
     def get_user_by_username(self, username: str) -> typing.Optional[dict]:
         self.cursor.execute('''
             SELECT * FROM user WHERE username = ?
