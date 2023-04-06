@@ -8,7 +8,7 @@ class Database:
         self.cursor.execute('''
             CREATE TABLE IF NOT EXISTS movie (
                 movie_id INTEGER PRIMARY KEY,
-                title TEXT,
+                title TEXT UNIQUE,
                 image_url TEXT,
                 release_date DATE,
                 age_rating TEXT

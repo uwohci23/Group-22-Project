@@ -29,6 +29,7 @@ body {
     display: flex;
     padding: 16px;
     font-size: 30px;
+    cursor: pointer;
 }
 
 .listItem {
