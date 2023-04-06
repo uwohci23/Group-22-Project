@@ -26,6 +26,7 @@ const modal = {
 
 const StaffModal = ({cardData, showModal, setShowModal, setLoadingStatus, setQueryCompleted, showLoading, setSuccess, setMessage }) => {
     const [stillCall, setStillCall] = React.useState(false);
+
     const handleMoviePost = async (data) => {
         const request = {
             title: data.title,
@@ -102,7 +103,6 @@ const StaffModal = ({cardData, showModal, setShowModal, setLoadingStatus, setQue
                                 <button className="modalButtonCancel" onClick={() => {handleCancellation()}}>Cancel</button>
                             </motion.div>
                             <Link to="/admin"></Link>
-                            {/* {success ? <OperationSuccessfulComponent  className="successMsg" message={"Movie was posted successfully"}/> : null} */}
                         </motion.div>
                     </motion.div>
                 )
