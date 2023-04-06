@@ -4,28 +4,24 @@ import "./Modal.css"
 import Seat from './Seat'
 import OperationSuccessfulComponent from '../OperationSuccessfulComponent/OperationSuccessfulComponent';
 
+const totalSeatRows = 6;
+const totalSeatColumns = 8;
+let grid = Array.from({ length: totalSeatRows }, () => Array(totalSeatColumns).fill(0));
+
+export const setGrid = (row, col, value) => {
+    grid[row][col] = value;
+    console.log(grid);
+}
+
 const Modal = (props) => {
     /*
     0 - Unselected
     1 - selected
     2 - sold
     */
-    const totalSeatRows = 6;
-    const totalSeatColumns = 8;
+
     const [success, setSuccess] = React.useState(false);
     const [totalSeats, setTotalSeats] = React.useState(0);
-    const [seatMap, setSeatMap] = React.useState(Array.from({ length: totalSeatRows }, () => Array(totalSeatColumns).fill(0)));
-
-    useEffect(() => {
-        setSeatMap(seatMap.map((row, rowIndex) => {
-            return row.map((seat, seatIndex) => {
-                if (rowIndex == 1 && seatIndex == 0) {
-                    return 2;
-                }
-                return seat;
-            })
-        }))
-    }, []);
     
     if (!props) {
         return null;
@@ -38,14 +34,7 @@ const Modal = (props) => {
         // props.setShow(false);
         setSuccess(true);
       };
-
-    const handleCost = event => {
-        document.getElementById("lblName").innerHTML = "Total: $" + (document.getElementById("tickets").selectedIndex + 1)*8.5
-    };
     
-    
-
-
     return (
         <div className ="pop-up">
             <div className="modal">
@@ -72,15 +61,13 @@ const Modal = (props) => {
                         <div className="container2">
                             <div className="screen"></div>
 
-                            {seatMap.map((row, rowIndex) => (
+                            {grid.map((row, rowIndex) => (
                                 <div className="row">
                                     {row.map((seat, seatIndex) => (
-                                        seatMap[rowIndex][seatIndex] === 2 ? (
+                                        grid[rowIndex][seatIndex] === 2 ? (
                                             <div className="seat sold"></div>
                                         ) : (
                                             <Seat 
-                                                seatMap={seatMap}
-                                                setSeatMap={setSeatMap}
                                                 row={rowIndex}
                                                 col={seatIndex}
                                                 seats={totalSeats}
@@ -88,18 +75,11 @@ const Modal = (props) => {
                                             />
                                         )
                                     ))}
-                                    {/* <div className="seat"></div>
-                                    <div className="seat"></div>
-                                    <div className="seat"></div>
-                                    <div className="seat"></div>
-                                    <div className="seat"></div>
-                                    <div className="seat"></div>
-                                    <div className="seat"></div> */}
                                 </div>
                             ))}
                         </div>
                     <div className="modal-body4">
-                        <label id="lblName">Total: $8.50 </label> 
+                        <label id="lblName">{`Total: $${totalSeats * 8.5}`}</label> 
                     </div>
                         <div className="btn">
                             <button id="pay" onClick={() => {handleClick(true);}} >Pay</button>
@@ -132,4 +112,4 @@ const Modal = (props) => {
     
     
 }
-export default Modal
+export default Modal;
