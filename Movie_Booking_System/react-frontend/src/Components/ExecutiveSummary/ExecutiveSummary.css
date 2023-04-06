@@ -5,6 +5,7 @@
     overflow: hidden;
     width: 40em;
     height: 25em;
+    margin-right: 50px;
     border-radius: 30px;
     border: 1px solid rgb(61, 43, 226);
 }

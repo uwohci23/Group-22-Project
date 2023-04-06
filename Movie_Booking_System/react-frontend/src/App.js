@@ -3,6 +3,8 @@ import "./App.css";
 import ExecutiveSummary from './Components/ExecutiveSummary/ExecutiveSummary';
 import NavMap from './Components/NavigationalMap/NavMap';
 import DesignPrinciples from './Components/DesignPrinciples/DesignPrinciples';
+import HeuristicEvaluation from './Components/HeuristicEvaluation/HeuristicEvaluation';
+import FinalEvaluation from './Components/FinalEvaluation/FinalEvaluation';
 
 function App() {
 
@@ -12,6 +14,8 @@ function App() {
         <ExecutiveSummary />
         <NavMap />
         <DesignPrinciples />
+        <HeuristicEvaluation />
+        <FinalEvaluation />
     </div>
     );
 }

@@ -31,5 +31,6 @@
     overflow: hidden;  
 }
 .singlePrincipleWrapper h1 {
+    margin-top: 2em;
     font-weight: 500;
 }
