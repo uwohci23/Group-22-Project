@@ -30,7 +30,8 @@ const RegisterUser = ({setShowRegister}) => {
     const [isAnimating, setIsAnimating] = React.useState(false);
     const [isAnimationComplete, setIsAnimationComplete] = React.useState(false);
     const [color, setColor] = React.useState("bg-purple-400");
-    const ref = React.useRef(null);
+    const registerRef = React.useRef(null);
+    const formRef = React.useRef(null);
 
     const handleMouseDown = () => {
         if (isAnimationComplete === false) {
@@ -47,30 +48,37 @@ const RegisterUser = ({setShowRegister}) => {
     };
 
     const handleAnimationComplete = (layout) => {
-        console.log(layout.width);
-        if (ref.current.style.width === "100%") {
+        if (registerRef.current.style.width === "100%") {
             console.log("Animation complete");
             // set ref to width 100%
-            ref.current.style.width = "100%";
+            registerRef.current.style.width = "100%";
             setIsAnimationComplete(true);
+            // formRef.current.submit();
+            // const data = new FormData(formRef.current);
+            // const entries = Object.fromEntries(data.entries());
+            // console.log("username" + entries.username);
+            handleSubmit(formRef);
+            console.log("requestGood: " + requestGood);
+            console.log("requestError: " + requestError);
             if (requestGood === true && requestError === false) {
                 setColor("bg-green-400");
             }
-            if (requestGood === false && requestError === true) {
+            if (requestError === true) {
                 setColor("bg-red-400");
             }
         }
     };
 
     // handle login display after user register
-    const handleShow = (state) => {
+    const handleShow = () => {
         navigate("/");
     }
 
     // handle form submission
     const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.target);
+        // event.preventDefault();
+        console.log("SUBMITTING");
+        const data = new FormData(event.current);
         const entries = Object.fromEntries(data.entries());
 
         const request = {
@@ -81,17 +89,39 @@ const RegisterUser = ({setShowRegister}) => {
             "last_name": entries.LastName,
             "admin_status": 0
         }
+        console.log(request);
         const result = Axios.post("http://127.0.0.1:5000/user/register", request).then(
             (response) => {
                 if (response.data.status) {
                     console.log("SUCCESSFUL CREATION");
                     setRequestGood(true);
+                    setColor("bg-green-400");
+                    setTimeout(() => {
+                        handleShow();
+                    }, 1500);
                 } else {
                     console.log("DID NOT CREATE");
                     setRequestError(true);
+                    setColor("bg-red-400");
+                    setTimeout(() => {
+                        setRequestError(false);
+                        setIsAnimationComplete(false);
+                        setIsAnimating(false);
+                        setColor("bg-purple-400");
+                    }, 3000);
                 }
             }
-        ).catch((error) => {setRequestError(true);});
+        ).catch((error) => {
+            console.log("ERROR");
+            setRequestError(true);
+            setColor("bg-red-400");
+            setTimeout(() => {
+                setRequestError(false);
+                setIsAnimationComplete(false);
+                setIsAnimating(false);
+                setColor("bg-purple-400");
+            }, 3000);
+        });
     }
 
     const onChange = (e) => {
@@ -106,7 +136,7 @@ const RegisterUser = ({setShowRegister}) => {
             type: "text",
             placeholder: "Username",
             label: "Username",
-            errorMessage: "Username cannot contain any special characters, should be 3-20 chars long!",
+            errorMessage: "Username cannot contain any special characters, should be 3-20 chars long",
             pattern: "^[A-Za-z0-9]{3,20}",
             required: true,
         },
@@ -116,7 +146,7 @@ const RegisterUser = ({setShowRegister}) => {
             type: "text",
             placeholder: "Email@example.com",
             label: "Email",
-            errorMessage: "email should be valid",
+            errorMessage: "Email should be valid",
             pattern: "^[A-Za-z0-9@.]{3,20}",
             required: true,
         },
@@ -126,7 +156,7 @@ const RegisterUser = ({setShowRegister}) => {
             type: "text",
             placeholder: "First Name",
             label: "First Name",
-            errorMessage: "Name should be 1-20 characters long - Cannot contain special chars",
+            errorMessage: "First Name should be 1-20 characters long - Cannot contain special chars",
             pattern: "^[A-Za-z0-9]{1,20}",
             required: true,
         },
@@ -155,8 +185,8 @@ const RegisterUser = ({setShowRegister}) => {
             name: "reenterPassword",
             type: "password",
             placeholder: "re-enter Password",
-            label: "re-enter Password",
-            errorMessage: "Passwords should match.",
+            label: "Re-enter Password",
+            errorMessage: "Password should match",
             pattern: values.password,
             required: true,
         },
@@ -166,10 +196,10 @@ const RegisterUser = ({setShowRegister}) => {
 
     const toggleOpen = () => setIsOpen(!isOpen);
 
-    const icon = () => {
+    const Icon = () => {
         // if the request was successful
         if (requestGood === true && requestError === false) {
-            <motion.span
+            return <motion.span
                 className="flex absolute text-4xl"
                 initial={{scale:0}}
                 animate={{scale:1}}
@@ -180,7 +210,7 @@ const RegisterUser = ({setShowRegister}) => {
 
         // if the request was not successful
         if (requestError === true) {
-            <motion.span
+            return <motion.span
                 className="flex absolute text-4xl"
                 initial={{scale:0}}
                 animate={{scale:1}}
@@ -212,7 +242,7 @@ const RegisterUser = ({setShowRegister}) => {
                         </Link>
 
                         {/* Form */}
-                        <form action="" method="get" onSubmit={handleSubmit} className="flex flex-col w-full h-3/4 p-10 gap-5">
+                        <form ref={formRef} action="" method="get" className="flex flex-col w-full h-3/4 p-10 gap-5 justify-center items-center">
                             <div className="flex flex-row w-full h-14 gap-5">
                                 <FormInput
                                     key = {inputs[0].id}
@@ -256,11 +286,11 @@ const RegisterUser = ({setShowRegister}) => {
                                 />
                             </div>
                             <div
-                                className="flex relative w-full h-14 gap-5 justify-center items-center rounded-md bg-gray-200"
+                                className="flex relative w-1/2 h-14 top-10 gap-5 justify-center items-center rounded-md cursor-pointer transition-shadow duration-200 hover:shadow-lg bg-gray-200"
                                 onMouseDown={handleMouseDown}
                                 onMouseUp={handleMouseUp}>
                                 <motion.div
-                                    ref={ref}
+                                    ref={registerRef}
                                     className={`flex absolute w-0 h-full left-0 rounded-md ${color}`}
                                     animate={isAnimating ? { width: "100%", left:0 } : { width: "0%" }}
                                     transition={{ duration: isAnimating? 1:0.2, ease: "easeInOut" }}
@@ -268,11 +298,7 @@ const RegisterUser = ({setShowRegister}) => {
                                     layout
                                 />
                                 {isAnimationComplete ? (
-                                <motion.span
-                                className="flex absolute text-4xl"
-                                initial={{scale:0}}
-                                animate={{scale:1}}
-                                transition={{duration:0.3}}><IoCheckmarkCircleSharp /></motion.span>
+                                <Icon />
                                 ) :
                                 (<span className="flex absolute">Register</span>)}
                                 
