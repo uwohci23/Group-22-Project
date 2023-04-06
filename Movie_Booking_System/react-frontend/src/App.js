@@ -10,7 +10,7 @@ function App() {
 
     return (
     <div className="App">
-        <h1>Hello there</h1>
+        <h1 className="mainTitle">Group 22 - Final Report</h1>
         <ExecutiveSummary />
         <NavMap />
         <DesignPrinciples />

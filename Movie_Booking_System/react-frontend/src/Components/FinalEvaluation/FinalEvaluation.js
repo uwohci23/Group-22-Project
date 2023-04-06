@@ -6,7 +6,7 @@ function FinalEvaluation() {
     return (
     <div className="finalWrapper">
         <div className="titleWrapper">
-            <h1>Heuristic Evaluation</h1>
+            <h1>Final Evaluation</h1>
         </div>
         <TextBlock className="finalText" message={
             `

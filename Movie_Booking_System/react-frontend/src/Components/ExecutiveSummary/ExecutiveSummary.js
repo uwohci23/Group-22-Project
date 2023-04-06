@@ -1,6 +1,7 @@
 import React from 'react';
 import "./ExecutiveSummary.css"
 import TextBlock from '../TextBlock/TextBlock';
+import CarrosselComponent from '../CarrosselComponent/CarrosselComponent';
 
 function ExecutiveSummary() {
 
@@ -11,7 +12,7 @@ function ExecutiveSummary() {
         </div>
         <div className="textImageWrapper">
             <div className="execImageWrapper">
-                <img className="imageTest" src="https://norlon.ca/wp-content/uploads/2021/03/engineeringexterior-web.jpg" alt="" />
+                <CarrosselComponent />
             </div>
             <TextBlock message = {
                     `
