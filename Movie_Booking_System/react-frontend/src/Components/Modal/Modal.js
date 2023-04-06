@@ -44,7 +44,7 @@ const Modal = (props) => {
                         <hr></hr>
                     </div>
                     <div className="modal-footer">
-                        <div className="container">
+                        <div className="container2">
                             <div className="screen"></div>
 
                                 <div className="row">
