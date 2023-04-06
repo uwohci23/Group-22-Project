@@ -1,13 +1,19 @@
 import React from 'react';
 import "./TextBlock.css"
 
-function TextBlock({message}) {
+function TextBlock({message, bigText}) {
 
     return (
     <div className="textBlockWrapper">
-        <div className="messageWrapper">
-            <p>{message}</p>
-        </div>
+        {bigText ?
+            <div className="messageWrapper">
+                <p>{message}</p>
+            </div>
+        :
+            <div className="smallMessageWrapper">
+                <p>{message}</p>
+            </div>
+        }
     </div>
     );
 }

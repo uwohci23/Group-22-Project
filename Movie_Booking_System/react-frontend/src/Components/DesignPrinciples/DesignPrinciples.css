@@ -1,0 +1,35 @@
+.principlesWrapper {
+    margin-top: 5em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.principleImageWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    width: 40em;
+    height: 25em;
+    border-radius: 30px;
+    border: 1px solid rgb(61, 43, 226);
+}
+
+.principleImageWrapper img {
+    flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.principleContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;  
+}
+.singlePrincipleWrapper h1 {
+    font-weight: 500;
+}

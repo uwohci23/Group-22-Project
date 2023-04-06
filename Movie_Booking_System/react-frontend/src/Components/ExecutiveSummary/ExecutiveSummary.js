@@ -6,13 +6,14 @@ function ExecutiveSummary() {
 
     return (
     <div className="summaryWrapper">
-
-        <h1>Executive Summary</h1>
+        <div className="titleWrapper">
+            <h1>Executive Summary</h1>
+        </div>
         <div className="textImageWrapper">
             <div className="execImageWrapper">
                 <img className="imageTest" src="https://norlon.ca/wp-content/uploads/2021/03/engineeringexterior-web.jpg" alt="" />
             </div>
-            <TextBlock message= {
+            <TextBlock message = {
                     `
                     Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
                     Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
@@ -23,7 +24,8 @@ function ExecutiveSummary() {
                     like Aldus PageMaker including versions of Lorem Ipsum.
                     
                     `
-            }/>
+            }
+            bigText={true}/>
         </div>
     </div>
     );

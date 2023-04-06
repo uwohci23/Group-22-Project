@@ -1,4 +1,4 @@
-.execImageWrapper {
+.mapImageWrapper {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,21 +8,16 @@
     border-radius: 30px;
     border: 1px solid rgb(61, 43, 226);
 }
-.summaryWrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 5em;
-}
-
-.execImageWrapper img {
+.mapImageWrapper img {
     flex-shrink: 0;
     min-width: 100%;
     min-height: 100%;
 }
 
-.textImageWrapper {
+.mapWrapper {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    margin-top: 5em;
 }
