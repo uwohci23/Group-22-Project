@@ -29,6 +29,13 @@ def add_user():
     # Get the user data from the request
     data = request.get_json()
 
+    if data['username'] == '' or data['password'] == '' or data['email'] == '' or data['first_name'] == '' or data['last_name'] == '':
+        return jsonify({
+            'status': False,
+            'message': 'Invalid input',
+        }), 400
+
+
     # add the user to the database
     # result = db.add_user(data['user_id'], data['username'])
 
