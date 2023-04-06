@@ -3,9 +3,6 @@ import "./StaffPage.css"
 import StaffInput from "../StaffInput/StaffInput.js"
 import MovieCardComponent from "../MovieCardComponent/MovieCardComponent.js"
 import NavBar from "../NavBar/NavBar";
-import Axios from "axios";
-import OperationFailedComponent from "../OperationFailedComponent/OperationFailedComponent";
-import OperationSuccessfulComponent from "../OperationSuccessfulComponent/OperationSuccessfulComponent";
 import StaffDropDownComponent from "../StaffDropDownComponent/StaffDropDownComponent";
 import StaffModal from "../StaffModal/StaffModal";
 import RequestModal from "../RequestModal/RequestModal";
