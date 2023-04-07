@@ -21,6 +21,9 @@ const Modal = (props) => {
     2 - sold
     */
 
+    let combo1 = 12.50;
+    let combo2 = 10.50;
+    const [comboCost, setComboCost] = React.useState(0);
     const [success, setSuccess] = React.useState(false);
     const [totalSeats, setTotalSeats] = React.useState(0);
     
@@ -124,7 +127,7 @@ const Modal = (props) => {
                             ))}
                         </div>
                     <div className="modal-body4">
-                        <label id="lblName">{`Total: $${totalSeats * 8.5}`}</label> 
+                        <label id="lblName">{"Total: $" + ((totalSeats * 8.5)+comboCost)}</label> 
                     </div>
                         <div className="btn">
                             <button id="pay" onClick={() => {handleClick(true);}} >Pay</button>
@@ -135,19 +138,25 @@ const Modal = (props) => {
                 </div>
                 <div className ="combo">
                 <div className="combo-content">
-                    <div className="combo-header">
+                    <div className="combo-title">
                         Please Select Combo
                     </div>
                     <div className="combo-body">
-                    <div className="moviePoster">
+                    <div className="comboPic">
                         <img src={"https://i.pinimg.com/originals/c3/38/f5/c338f52826e44e0be91b677bc476671d.png"} alt="" />
+                        <img src={"https://cdn-icons-png.flaticon.com/512/2892/2892731.png"} alt="" />
+                        <img src={"https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Location_arithmetic_vertical.svg/1200px-Location_arithmetic_vertical.svg.png"} alt="" />
                         <img src={"https://i.pinimg.com/originals/c3/38/f5/c338f52826e44e0be91b677bc476671d.png"} alt="" />
+                        <img src={"https://static.vecteezy.com/system/resources/previews/009/380/496/original/soda-can-clipart-design-illustration-free-png.png"} alt="" />
+                        </div>   
+                    </div> 
+                    <div className= "radioBtns" >      
+                            <input type="checkbox" id="combo1" onChange={() => {handleCombo1();}} value="Combo 1 (Popcorn with soda)   "  /> Combo 1: $10.50 (Popcorn with water)  
                         </div>
-                    </div>
+                        <div className= "radioBtns">      
+                        <input type="checkbox" id="combo2" onChange={(event) => {handleCombo2(event);}} value="Combo 2 (Popcorn with water)   "  /> Combo 2: $12.50 (Popcorn with soda)   
+                        </div>
                     <div>
-                            <input type="radio" value="Combo 1 (Popcorn with pop)   " name="gender" /> Combo 1 (Popcorn with pop)        
-                            <input type="radio" value="Combo 2 (Popcorn with water)   " name="gender" /> Combo 2 (Popcorn with water)   
-                            <input type="radio" value="None" name="gender" /> None 
                         </div>
                 </div>
             </div>

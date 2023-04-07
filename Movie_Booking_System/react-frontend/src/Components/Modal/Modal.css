@@ -91,6 +91,13 @@
 .moviePoster {
     display: flex;
     justify-content: center;
+    overflow: auto;
+}
+.comboPic{
+  display: flex;
+  justify-content: center;
+  height: 200px;
+  width: 200px; 
 }
 .movie-container {
     margin: 20px 0;
@@ -203,6 +210,7 @@ hr {
   top: 0;
   right: 0;
   bottom: 0;
+  margin-left: 50px;
   display:flex;
   align-items: center;
   justify-content: center;
@@ -233,6 +241,13 @@ hr {
 }
 
 .combo-title{
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  font-weight: bold;
+}
+
+.radioBtns{
   display: flex;
   justify-content: center;
   margin: 0;
