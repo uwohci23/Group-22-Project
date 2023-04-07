@@ -4,6 +4,7 @@ import "./Modal.css"
 import Seat from './Seat'
 import Axios from "axios";
 import OperationSuccessfulComponent from '../OperationSuccessfulComponent/OperationSuccessfulComponent';
+import OperationFailedComponent from '../OperationFailedComponent/OperationFailedComponent';
 
 const totalSeatRows = 6;
 const totalSeatColumns = 8;
@@ -25,28 +26,58 @@ const Modal = (props) => {
     let combo2 = 10.50;
     const [comboCost, setComboCost] = React.useState(0);
     const [success, setSuccess] = React.useState(false);
+    const [seatsLoaded, setSeatsLoaded] = React.useState(false);
     const [totalSeats, setTotalSeats] = React.useState(0);
     
-    // React.useEffect(() => {
-    //     if (props) {
-    //         const result = Axios.post(`http://127.0.0.1:5000/theatre/${props.movieData.title}`).then(
-    //         (response) => {
-    //             if (response.data.status) {
-    //                 console.log("SUCCESSFUL CREATION");
-    //                 console.log(response.data.data)
-    //             } else {
-    //                 console.log("DID NOT CREATE");
-    //             }
-    //         }
-    //         ).catch((error) => {
-    //             console.log("USEEFFECT ERROR");
-    //         });
-    //     }
-    // }, []);
+    React.useEffect(() => {
+        if (props) {
+            const result = Axios.get(`http://127.0.0.1:5000/theatre/seats/${props.movieData.title}`).then(
+            (response) => {
+                if (response.status) {
+                    console.log("SUCCESSFUL CREATION");
+                    console.log(response.data)
+                    for (let i = 0; i < response.data.length; i++) {
+                        grid[response.data[i][2]][response.data[i][3]] = 2;
+                    }
+                    console.log("Grid");
+                    setSeatsLoaded(true);
+                } else {
+                    console.log("DID NOT CREATE: ", response.status);
+                }
+            }
+            ).catch((error) => {
+                console.log("USEEFFECT ERROR");
+            });
+        }
+    }, []);
 
     const handleClose = () => {
         props.setShow(false);
     }
+    const handleCombo1 = event => {
+
+        let checkbox = document.getElementById("combo1");
+        checkbox.addEventListener( "change", () => {
+            if ( checkbox.checked ) {
+               setComboCost(combo1);
+            } else {
+              setComboCost(0);
+            }
+         });
+    };
+
+    const handleCombo2 = event => {
+
+        let checkbox = document.getElementById("combo2");
+        checkbox.addEventListener( "change", () => {
+            if ( checkbox.checked ) {
+               setComboCost(combo2);
+            } else {
+              setComboCost(0);
+            }
+         });
+    };
+
 
     const request = () => {
         let seats = [];
@@ -74,6 +105,7 @@ const Modal = (props) => {
         (response) => {
             if (response.data.status) {
                 console.log("SUCCESSFUL CREATION");
+                setSuccess(true);
             } else {
                 console.log("DID NOT CREATE");
             }
@@ -113,7 +145,7 @@ const Modal = (props) => {
                                 <div className="row">
                                     {row.map((seat, seatIndex) => (
                                         grid[rowIndex][seatIndex] === 2 ? (
-                                            <div className="seat sold"></div>
+                                            seatsLoaded && <div className="seat sold"></div>
                                         ) : (
                                             <Seat 
                                                 row={rowIndex}
@@ -134,7 +166,7 @@ const Modal = (props) => {
                         </div>
                         
                     </div>
-                    {success ? <OperationSuccessfulComponent message={"Successfully emailed your tickets"}/> : null}
+                    {success && <OperationSuccessfulComponent message={"Successfully emailed your tickets"}/>}
                 </div>
                 <div className ="combo">
                 <div className="combo-content">
