@@ -145,42 +145,32 @@ function DesignPrinciples() {
         },
         {
             message: `
-            22222222222222222222
-            oooooooooooooooooooo
-            oooooooooooooooooooo
-            oooooooooooooooooooo
-            oooooooooooooooooooo
-            oooooooooooooooooooo
-            22222222222222222222
+            The use of a movie theatre in the movie-pop up, also known as the modal, is an example of a physical metaphor. 
+            With the use of this metaphor, users will easily be able to distinguish what the seats represent. 
+            It is much easier to book tickets and understand where you will be sitting with this metaphor.
             `,
-            title: "Principle 16",
-            image: process.env.PUBLIC_URL + "/login-1.jpg"
+            title: "Principle 16 - Physical Metaphor (Movie Popup)",
+            image: process.env.PUBLIC_URL + "/Stefan-1.png"
         },
         {
             message: `
-            22222222222222222222
-            oooooooooooooooooooo
-            oooooooooooooooooooo
-            oooooooooooooooooooo
-            oooooooooooooooooooo
-            oooooooooooooooooooo
-            22222222222222222222
+            By repositioning the “close” button to the top right it provides safety of the application. 
+            Having the close button too close to the pay button can lead to miss-input by the user closing the pop-up when 
+            wanting to pay. It is essential to not have the close button so close to the pay button or this would lead 
+            to a frustrating experience and users would be driven away from our application.
             `,
-            title: "Principle 17",
-            image: process.env.PUBLIC_URL + "/login-1.jpg"
+            title: "Principle 17 - Safety of application (Movie Popup)",
+            image: process.env.PUBLIC_URL + "/Stefan-2.png"
         },
         {
             message: `
-            22222222222222222222
-            oooooooooooooooooooo
-            oooooooooooooooooooo
-            oooooooooooooooooooo
-            oooooooooooooooooooo
-            oooooooooooooooooooo
-            22222222222222222222
+            The combos are represented with icons which make it easier to identify what the user is purchasing. 
+            This is an example of encoding discursive information. Users will easily be able to distinguish between 
+            a water bottle and a soda can (the main difference between the two combos) and allow them to select a combo 
+            of their choosing with a very user friendly experience.
             `,
-            title: "Principle 18",
-            image: process.env.PUBLIC_URL + "/login-1.jpg"
+            title: "Principle 18 - Encoding discursive information (Movie Popup)",
+            image: process.env.PUBLIC_URL + "/Stefan-3.png"
         },
         {
             message: `
@@ -210,7 +200,7 @@ function DesignPrinciples() {
         },
     ]
     return (
-    <div className="principlesWrapper">
+    <div className="principlesWrapper" id="principles">
         <div className="titleWrapper">
             <h1>Utilized Design Principles</h1>
         </div>
