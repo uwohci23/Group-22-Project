@@ -2,6 +2,7 @@ import React from 'react'
 import { useEffect } from 'react'
 import "./Modal.css"
 import Seat from './Seat'
+import Axios from "axios";
 import OperationSuccessfulComponent from '../OperationSuccessfulComponent/OperationSuccessfulComponent';
 
 const totalSeatRows = 6;
@@ -23,18 +24,62 @@ const Modal = (props) => {
     const [success, setSuccess] = React.useState(false);
     const [totalSeats, setTotalSeats] = React.useState(0);
     
-    if (!props) {
-        return null;
-    } 
+    // React.useEffect(() => {
+    //     if (props) {
+    //         const result = Axios.post(`http://127.0.0.1:5000/theatre/${props.movieData.title}`).then(
+    //         (response) => {
+    //             if (response.data.status) {
+    //                 console.log("SUCCESSFUL CREATION");
+    //                 console.log(response.data.data)
+    //             } else {
+    //                 console.log("DID NOT CREATE");
+    //             }
+    //         }
+    //         ).catch((error) => {
+    //             console.log("USEEFFECT ERROR");
+    //         });
+    //     }
+    // }, []);
 
     const handleClose = () => {
         props.setShow(false);
     }
+
+    const request = () => {
+        let seats = [];
+        for (let i = 0; i < grid.length; i++) {
+            for (let j = 0; j < grid[i].length; j++) {
+                if (grid[i][j] === 1) {
+                    seats.push(
+                        {
+                            "row": i,
+                            "col": j
+                        }
+                    );
+                }
+            }
+        }
+
+        return {
+            "movie_title": props.movieData.title,
+            "seats": seats
+        }
+    };
+
     const handleClick = event => {
-        // props.setShow(false);
-        setSuccess(true);
-      };
-    
+        const result = Axios.post("http://127.0.0.1:5000/movie/book", request()).then(
+        (response) => {
+            if (response.data.status) {
+                console.log("SUCCESSFUL CREATION");
+            } else {
+                console.log("DID NOT CREATE");
+            }
+        }
+        ).catch((error) => {
+            console.log("ERROR");
+        });
+    };
+
     return (
         <div className ="pop-up">
             <div className="modal">
