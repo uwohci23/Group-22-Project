@@ -8,8 +8,9 @@ function NavMap() {
             <h1>Testing the navigational map</h1>
         </div>
         <div className="mapImageWrapper">
-                <img className="imageTest" src="https://norlon.ca/wp-content/uploads/2021/03/engineeringexterior-web.jpg" alt="" />
-            </div>
+            <img className="imageTest" src={process.env.PUBLIC_URL + "nav-map.png"} alt="" />
+        </div>
+            <img className="imageTest" src={process.env.PUBLIC_URL + "nav-map2.png"} alt="" />
     </div>
     );
 }

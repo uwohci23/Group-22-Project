@@ -3,8 +3,8 @@
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    width: 40em;
-    height: 25em;
+    max-width: 100em;
+    height: 90em;
     border-radius: 30px;
     border: 1px solid rgb(61, 43, 226);
 }

@@ -17,6 +17,9 @@ function App() {
         <div className="appCols">
             <div className="reportContent">
                 <h1 className="mainTitle">Group 22 - Final Report</h1>
+                <div className="buttonWrapper">
+                    <button className='goToAppButton'><a className='buttonAnchor' href="">Go to App</a></button>
+                </div>
                 <ExecutiveSummary />
                 <NavMap />
                 <DesignPrinciples />

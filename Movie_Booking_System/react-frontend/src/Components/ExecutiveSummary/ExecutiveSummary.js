@@ -16,13 +16,13 @@ function ExecutiveSummary() {
             </div>
             <TextBlock message = {
                     `
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                    when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-                    It has survived not only five centuries, but also the leap into electronic typesetting,
-                    remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset 
-                    sheets containing Lorem Ipsum passages, and more recently with desktop publishing software 
-                    like Aldus PageMaker including versions of Lorem Ipsum.
+                    The Book-A-Movie web application is designed to provide users with an easy and convenient way to browse, select and purchase movie tickets online. The platform includes a user-friendly login feature that allows users to create an account and securely store their personal and payment information for future purchases.
+
+                    Once logged in, users can browse through a wide range of movies currently showing in local cinemas and select their preferred screening seat. 
+                    
+                    Users can then select their preferred seating arrangement and purchase tickets securely using their stored payment information. The application also offers the option to purchase combo deals that include soft drinks and popcorn, providing users with an all-in-one solution for their movie experience.
+                    
+                    Overall, the movie web application offers a convenient and easy-to-use platform for users to browse, select and purchase movie tickets online, with added benefits of combo deals and secure payment options.
                     
                     `
             }

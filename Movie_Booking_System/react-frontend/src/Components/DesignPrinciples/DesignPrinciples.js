@@ -174,29 +174,25 @@ function DesignPrinciples() {
         },
         {
             message: `
-            22222222222222222222
-            oooooooooooooooooooo
-            oooooooooooooooooooo
-            oooooooooooooooooooo
-            oooooooooooooooooooo
-            oooooooooooooooooooo
-            22222222222222222222
+            The register page has affordances that provide users with guidance on how to interact with the components and 
+            avoid errors. A conditional tooltip displays information about different types of errors related to the input, 
+            while the register button also includes a tooltip that offers guidance on how to interact with the button. 
+            These affordances help to improve the usability and user experience of the registration process by providing 
+            users with clear and helpful information
             `,
-            title: "Principle 19",
-            image: process.env.PUBLIC_URL + "/login-1.jpg"
+            title: "Principle 19 - Register (Affordance)",
+            image: process.env.PUBLIC_URL + "/Mihir-1.png"
         },
         {
             message: `
-            22222222222222222222
-            oooooooooooooooooooo
-            oooooooooooooooooooo
-            oooooooooooooooooooo
-            oooooooooooooooooooo
-            oooooooooooooooooooo
-            22222222222222222222
+            To ensure that users provide all the necessary information, the registration form employs a 
+            constraint that requires all input fields to be filled out before the user can interact with the register button. 
+            As a result, the register button remains disabled until all required information has been provided, thereby 
+            preventing users from submitting incomplete or incorrect information. This constraint helps to improve the usability
+             and user experience of the registration process by guiding users toward completing all required fields before 
+             proceeding.
             `,
-            title: "Principle 20",
-            image: process.env.PUBLIC_URL + "/login-1.jpg"
+            title: "Principle 20 - Register (Constraint)",
         },
     ]
     return (

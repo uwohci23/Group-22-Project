@@ -20,6 +20,26 @@
     right: 1000px;
 }
 
-/* .dropWrapper {
-    right: 1000px;
-} */
+.goToAppButton {
+    width: 20%;
+    height: 3em;
+    background-color: rgb(61, 43, 226);
+    font-size: larger;
+    transition: 0.5s;
+    border-radius: 0.25em;
+    cursor: pointer;
+    color: white;
+    margin-left: 625px;
+}
+.goToAppButton:hover {
+    transform: scale(1.1);
+}
+.buttonWrapper {
+    display: flex;
+    align-items: center;
+}
+
+.buttonAnchor {
+    color: white;
+    text-decoration: none;
+}
