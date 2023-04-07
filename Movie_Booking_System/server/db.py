@@ -49,13 +49,6 @@ class Database:
             )
         ''')
         self.cursor.execute('''
-            CREATE TABLE IF NOT EXISTS theatre (
-                theatre_id INTEGER PRIMARY KEY,
-                users_id TEXT,
-                current_seats INTEGER
-            )
-        ''')
-        self.cursor.execute('''
             CREATE TABLE IF NOT EXISTS bookmarks ( 
             bookmark_id INTEGER PRIMARY KEY AUTOINCREMENT,
             user_id INTEGER,
@@ -66,7 +59,7 @@ class Database:
         ''')
         self.cursor.execute('''
             CREATE TABLE IF NOT EXISTS theatre (
-                theatre_id INTEGER PRIMARY KEY,
+                theatre_id INTEGER PRIMARY KEY AUTOINCREMENT,
                 movie_id INTEGER,
                 movie_title TEXT,
                 current_seats INTEGER,
@@ -75,7 +68,7 @@ class Database:
         ''')
         self.cursor.execute('''
             CREATE TABLE IF NOT EXISTS seat (
-                seat_id INTEGER PRIMARY KEY,
+                seat_id INTEGER PRIMARY KEY AUTOINCREMENT,
                 theatre_id INTEGER,
                 row_number INTEGER,
                 column_number INTEGER,
@@ -89,6 +82,7 @@ class Database:
         try:
             data = self.get_theatre_by_movie_title(movie_title)
             theatre_id = data['theatre_id']
+            print("Theatre ID: ", theatre_id)
             self.cursor.execute('''
                 INSERT INTO seat (theatre_id, row_number, column_number, status)
                 VALUES (?, ?, ?, ?)
@@ -105,12 +99,21 @@ class Database:
             SELECT * FROM seat WHERE theatre_id = ?
         ''', (theatre_id,))
         data = self.cursor.fetchall()
+        print(data)
+        # return {
+        #     "seat_id": data[0],
+        #     "theatre_id": data[1],
+        #     "row_number": data[2],
+        #     "column_number": data[3],
+        #     "status": data[4]
+        # }
         return data
 
     def add_theatre(self, movie_title: str, current_seats: int) -> bool:
         try:
             data = self.get_movie_by_title(movie_title)
             movie_id = data['movie_id']
+            print("Movie ID: ", movie_id)
             self.cursor.execute('''
                 INSERT INTO theatre (movie_id, movie_title, current_seats)
                 VALUES (?, ?, ?)
@@ -148,6 +151,7 @@ class Database:
             SELECT * FROM theatre WHERE theatre_id = ?
         ''', (theatre_id,))
         data = self.cursor.fetchall()
+        print("theatre Data: ", data)
         if data is None:
             return None
         return {
@@ -158,10 +162,12 @@ class Database:
         }
 
     def get_theatre_by_movie_title(self, movie_title: str) -> typing.Optional[dict]:
+        print("Movie Title: ", movie_title)
         self.cursor.execute('''
             SELECT * FROM theatre WHERE movie_title = ?
         ''', (movie_title,))
         data = self.cursor.fetchone()
+        print("Data: ", data)
         if data is None:
             return None
         return {
@@ -172,7 +178,7 @@ class Database:
         }
     def get_movie_by_title(self, movie_title: str) -> typing.Optional[dict]:
         self.cursor.execute('''
-            SELECT * FROM movie WHERE movie_title = ?
+            SELECT * FROM movie WHERE title = ?
         ''', (movie_title,))
         data = self.cursor.fetchone()
         if data is None:
