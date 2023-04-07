@@ -18,24 +18,6 @@ const MovieCardComponent = (props) => {
 
     },[props.bookmark]);
 
-    // console.log("movie card: ",props.userid)
-    // React.useEffect(() => {
-    // const updateBookmarks = (event) => {
-    //     console.log("user id is ",props.userid);
-    //     const result = Axios.get(`http://127.0.0.1:5000/user/${props.userid}/bookmarklist`).then(
-    //     (response) => {
-    //         if(response.data.status){
-    //             console.log("successful",result);
-                
-    //         }
-    //         else{
-    //             console.log("unsuccessful");
-    //         }
-    //     }
-    //     )
-    // }
-    // updateBookmarks();
-    // },[1]);
     const handleClick = (event) => {
         props.setDisplayModal({
             imageUrl: props.imageUrl,
@@ -53,7 +35,7 @@ const MovieCardComponent = (props) => {
         let url = ""
         if (isBookmarked === false){
             console.log("we are going to ADD", isBookmarked)
-            const result = Axios.post('http://127.0.0.1:5000/user/bookmark/add',request).then(
+            const result = Axios.post('http://13.58.139.97:5000/user/bookmark/add',request).then(
                 (response) => {
                     if (response.data.status) {
                         console.log("successful")
@@ -69,7 +51,7 @@ const MovieCardComponent = (props) => {
             console.log("WE ARE GOING TO REMOVE", isBookmarked)
             console.log("request in delete is ",request)
 
-            const del_result = Axios.delete('http://127.0.0.1:5000/user/bookmark/delete',{data: request}).then(
+            const del_result = Axios.delete('http://13.58.139.97:5000/user/bookmark/delete',{data: request}).then(
                 (response) => {
                     if (response.data.status) {
                         console.log("successful")

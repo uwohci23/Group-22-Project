@@ -16,12 +16,11 @@ const BookmarkedMoviesPage = ({navBarUserid}) => {
     const handleList = () => {
         setShowMoviesButton(false);
         console.log("userid is ",navBarUserid)
-        const result = Axios.get(`http://127.0.0.1:5000/user/${navBarUserid}/bookmarklist`).then(
+        const result = Axios.get(`http://13.58.139.97:5000/user/${navBarUserid}/bookmarklist`).then(
             (response) => {
 
                 if (response.status < 400) {
                     console.log("userid", navBarUserid)
-                    // const result = Axios.get(`http://127.0.0.1:5000/user/${props.navBarUserid}/`).then(
                     setOriginalMovieList(response.data);
                     setMovieList(response.data);
 

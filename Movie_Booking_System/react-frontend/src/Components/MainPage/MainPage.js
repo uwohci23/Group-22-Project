@@ -14,7 +14,7 @@ const MainPage = (props) => {
     const [bookmarkList,setBookmarkList] = React.useState('');
     const handleList =  async () => {
         setShowMoviesButton(false);
-        const response1 = await  Axios.get("http://127.0.0.1:5000/movie/list");
+        const response1 = await  Axios.get("http://13.58.139.97:5000/movie/list");
         if (response1.status < 400) {
             setOriginalMovieList(response1.data);
             setMovieList(response1.data);
@@ -23,7 +23,7 @@ const MainPage = (props) => {
          // add useEffect to run handleList on page load
       
 
-        const response2 = await Axios.get(`http://127.0.0.1:5000/user/${props.navBarUserid}/bookmarklist`);
+        const response2 = await Axios.get(`http://13.58.139.97:5000/user/${props.navBarUserid}/bookmarklist`);
         if (response2.status < 400) {
                 setBookmarkList(response2.data);
                 const updatedMovieList = response1.data.map((movie) => {

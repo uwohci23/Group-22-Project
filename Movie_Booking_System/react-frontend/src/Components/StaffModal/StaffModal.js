@@ -34,7 +34,7 @@ const StaffModal = ({cardData, showModal, setShowModal, setLoadingStatus, setQue
             release_date: data.releaseDate,
             age_rating: data.ageRating,
         };
-        const result = await Axios.post("http://127.0.0.1:5000/movie/add", request).then(
+        const result = await Axios.post("http://13.58.139.97:5000/movie/add", request).then(
             (response) => {
                 if (response.data.status < 300) {
                     // set status here

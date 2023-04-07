@@ -31,7 +31,7 @@ const Modal = (props) => {
     
     React.useEffect(() => {
         if (props) {
-            const result = Axios.get(`http://127.0.0.1:5000/theatre/seats/${props.movieData.title}`).then(
+            const result = Axios.get(`http://13.58.139.97:5000/theatre/seats/${props.movieData.title}`).then(
             (response) => {
                 if (response.status) {
                     console.log("SUCCESSFUL CREATION");
@@ -101,7 +101,7 @@ const Modal = (props) => {
     };
 
     const handleClick = event => {
-        const result = Axios.post("http://127.0.0.1:5000/movie/book", request()).then(
+        const result = Axios.post("http://13.58.139.97:5000/movie/book", request()).then(
         (response) => {
             if (response.data.status) {
                 console.log("SUCCESSFUL CREATION");

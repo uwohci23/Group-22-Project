@@ -90,7 +90,7 @@ const RegisterUser = ({setShowRegister}) => {
             "admin_status": 0
         }
         console.log(request);
-        const result = Axios.post("http://127.0.0.1:5000/user/register", request).then(
+        const result = Axios.post("http://13.58.139.97:5000/user/register", request).then(
             (response) => {
                 if (response.data.status) {
                     console.log("SUCCESSFUL CREATION");

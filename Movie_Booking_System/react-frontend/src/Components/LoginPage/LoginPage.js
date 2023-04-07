@@ -30,7 +30,7 @@ const LoginComponent = ({userName,setUserName,setUserid}) => {
         
         const request = {username: username, password: password};
         
-        const result = Axios.post("http://127.0.0.1:5000/user/login", request).then(
+        const result = Axios.post("http://13.58.139.97:5000/user/login", request).then(
             async (response) => {
                 if (response.data.status) {
                     // login is successful, check for admin
