@@ -18,7 +18,7 @@ function App() {
             <div className="reportContent">
                 <h1 className="mainTitle">Group 22 - Final Report</h1>
                 <div className="buttonWrapper">
-                    <button className='goToAppButton'><a className='buttonAnchor' href="">Go to App</a></button>
+                    <button className='goToAppButton'><a className='buttonAnchor' href="http://13.58.139.97/">Go to App</a></button>
                 </div>
                 <ExecutiveSummary />
                 <NavMap />

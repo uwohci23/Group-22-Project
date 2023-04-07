@@ -10,20 +10,14 @@ function FinalEvaluation() {
         </div>
         <TextBlock className="finalText" message={
             `
-            Overall we enjoyed working on the Book-A-Movie application. If given more time, 
-            we would like to implement more features. Users appreciate a personalised experience that caters 
-            to their individual preferences. The application could use data analytics to understand user preferences 
-            and suggest movies that align with their interests.The application can use algorithms to recommend movies 
-            based on the user's viewing history, ratings, and reviews. This can help users discover new movies and increase 
-            engagement with the platform. Simplifying the checkout process can help reduce abandoned cart rates and increase 
-            conversion rates. The application can integrate with popular payment gateways and offer a range of payment options.
-             As more users access the internet through mobile devices, optimising the application for mobile devices is crucial. 
-             This can include designing a responsive interface that adjusts to different screen sizes and optimising load times 
-             for slower mobile networks. Integrating with social media platforms can help increase the application's reach and 
-             encourage social sharing. This can include features such as social logins, social sharing, and user-generated 
-             content. By incorporating these features, a movie web application can enhance user experience, increase engagement, 
-             and ultimately drive growth and revenue.
-                            
+            In conclusion, the Book-A-Movie web application is a comprehensive solution that offers users a hassle-free movie 
+            experience. In light of the final evaluation, there are improvements to be made in the system, like a machine 
+            learning recommendation system for movies. This also reduces cognitive offloading when picking a movie. Also, 
+            social media integration, and movie rating systems could be added to give more information about movies, so that 
+            people can make better more informed choices. Ranking movies based on hype, ratings etc also allow people to make 
+            more informed choices about the movies they want to watch. Lastly, a “sign up with google account” or “sign up 
+            with Facebook” or any other existing social media account allows for people to not have to go through the hasty 
+            registration page, which is also a feature that could be improved upon.               
             `
         } bigText={true}/>
     </div>
