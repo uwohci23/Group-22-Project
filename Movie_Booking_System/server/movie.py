@@ -39,25 +39,22 @@ def get_all_movies():
 # POST /movie/book
 @movie_blueprint.route('/book', methods=['POST'])
 def book_movie():
-    # {
-    #     "user_id": "1",
-    #     "movie_id": "1",
-    #     "movie_title": "The Matrix",
-    #     "seat_row": "1",
-    #     "seat_column": "1"
-    # }
     # Get the movie data from the request
     data = request.get_json()
+    print(data)
+    seats = data['seats']
 
-    # book the movie
-    result = db.add_seats(data['movie_title'], data['seat_row'], data['seat_column'], 1)
+    for seat in seats:    
+        # book the movie
+        result = db.add_seats(data['movie_title'], seat['row'], seat['col'], 1)
+        print("Seat Result: ", result)
 
-    # If the movie doesn't exist, return a 404
-    if not result:
-        return jsonify({
-            'status': False,
-            'message': 'Movie not found',
-        }), 404
+        # If the movie doesn't exist, return a 404
+        if not result:
+            return jsonify({
+                'status': False,
+                'message': 'Seat already booked',
+            }), 404
     
     # Return a success message
     return jsonify({
@@ -83,6 +80,7 @@ def add_movie():
     
     # add a theater for the movie
     result = db.add_theatre(data['title'], 200)
+    print(result)
 
     # Return a success message
     return jsonify({
