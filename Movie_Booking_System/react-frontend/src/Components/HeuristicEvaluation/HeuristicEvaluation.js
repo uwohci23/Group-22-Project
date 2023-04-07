@@ -4,7 +4,7 @@ import TextBlock from '../TextBlock/TextBlock';
 
 function HeuristicEvaluation() {
     return (
-    <div className="heuristicsWrapper">
+    <div className="heuristicsWrapper" id="heuristic">
         <div className="titleWrapper">
             <h1>Heuristic Evaluation</h1>
         </div>

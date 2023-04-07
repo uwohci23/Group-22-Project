@@ -17,11 +17,15 @@
     list-style: none;
     margin: 0;
     padding: 10px;
+    color: inherit;
+    text-decoration: none;
 }
 
 .listItemDropdown:hover {
-    color: rgb(212, 212, 212);
-    transition: 0.6s;
+    color: white;
+    font-weight: bold;
+    background-color: rgb(84, 68, 225);
+    transition: 0.2s;
 }
 
 .menuButton {

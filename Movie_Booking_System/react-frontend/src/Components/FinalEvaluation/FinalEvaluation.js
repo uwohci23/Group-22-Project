@@ -4,7 +4,7 @@ import TextBlock from '../TextBlock/TextBlock';
 
 function FinalEvaluation() {
     return (
-    <div className="finalWrapper">
+    <div className="finalWrapper" id="finalEval">
         <div className="titleWrapper">
             <h1>Final Evaluation</h1>
         </div>

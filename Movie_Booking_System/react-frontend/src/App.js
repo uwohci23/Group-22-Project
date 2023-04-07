@@ -12,7 +12,7 @@ function App() {
     return (
     <div className="App">
         <div className="dropWrapper">
-            <DropdownComponent className="dropDown"/>
+            <DropdownComponent className="dropDown" />
         </div>
         <div className="appCols">
             <div className="reportContent">

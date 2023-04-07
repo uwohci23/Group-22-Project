@@ -31,9 +31,9 @@ const listVariants = {
 
 
 
-const MenuComponent = ({ isOpen, setIsOpen }) => {
+const MenuComponent = ({ isOpen, setIsOpen}) => {
 
-  return (
+    return (
     <motion.nav 
         className="menu"
         initial={false}
@@ -58,11 +58,15 @@ const MenuComponent = ({ isOpen, setIsOpen }) => {
                 className="listCover"
                 variants={ listVariants }
             >
-
+                <motion.a className='listItemDropdown' href="#execSum">Executive Summary</motion.a>
+                <motion.a className='listItemDropdown' href="#navigMap">Navigational Map</motion.a>
+                <motion.a className='listItemDropdown' href="#principles">Design Principles</motion.a>
+                <motion.a className='listItemDropdown' href="#heuristic">Heuristic</motion.a>
+                <motion.a className='listItemDropdown' href="#finalEval">Final Evaluation</motion.a>
             </motion.ul>
         </motion.div>
     </motion.nav>
-  )
+    )
 }
 
 export default MenuComponent
