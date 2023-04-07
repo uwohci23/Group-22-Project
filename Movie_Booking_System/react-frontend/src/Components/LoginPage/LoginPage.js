@@ -65,7 +65,7 @@ const LoginComponent = ({userName,setUserName,setUserid}) => {
         <div className="loginCover">
             <form action="" method="post">
                 <div className="loginPage">
-                    <h1>Firestone Project</h1>
+                    <h1>Book-A-Movie</h1>
                     <input placeholder = "username" id="username" type="text" className={`loginInput ${loginStatus === 'failure' ? 'failure' : (loginStatus === 'success' ? 'success' : '')}`} />
                     <input placeholder = "password" id="password" type="password" className={`loginInput ${loginStatus === 'failure' ? 'failure' : (loginStatus === 'success' ? 'success' : '')}`} />
 
